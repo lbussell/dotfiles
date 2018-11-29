@@ -8,6 +8,10 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 set shiftwidth=4
+filetype plugin indent on
+
+"Backspace across lines
+set backspace=indent,eol,start
 
 "UI settings
 set number
