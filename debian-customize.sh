@@ -1,7 +1,7 @@
 
 # Set up .bashrc
 rm ~/.bashrc
-echo 'export PS1="\[\033[32;1m\][\u@\h \w]\n$ \[\033[0m\]"' >> ~/.bashrc
+echo 'export PS1="\[\033[32m\][\u@\h \w]\n$ \[\033[0m\]"' >> ~/.bashrc
 
 # Set up vim
 mkdir ~/.vim/colors
