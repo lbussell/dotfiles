@@ -14,12 +14,17 @@ filetype plugin indent on
 set backspace=indent,eol,start
 
 "UI settings
+set mouse=a
 set number
 set showcmd
 set cursorline
 filetype indent on
 set wildmenu
 set showmatch "show matching ([{}])
+set ttimeoutlen=50
+
+"Font
+set guifont=RobotoMonoForPowerline-Regular:h12
 
 "Searching
 set incsearch
@@ -42,4 +47,9 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'brennier/quicktex'
 Plug 'junegunn/goyo.vim'
 Plug 'alvan/vim-closetag'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
+
+"Airline Settings
+let g:airline_powerline_fonts = 1
