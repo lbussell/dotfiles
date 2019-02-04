@@ -22,6 +22,7 @@ filetype indent on
 set wildmenu
 set showmatch "show matching ([{}])
 set ttimeoutlen=50
+set hidden
 
 "Font
 set guifont=RobotoMonoForPowerline-Regular:h12
@@ -29,6 +30,7 @@ set guifont=RobotoMonoForPowerline-Regular:h12
 "Searching
 set incsearch
 set hlsearch
+set path+=**
 
 "Switching between buffers
 :nnoremap <Right> :bnext<CR>
@@ -49,6 +51,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'alvan/vim-closetag'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
 call plug#end()
 
 "Airline Settings
