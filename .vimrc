@@ -1,7 +1,7 @@
 syntax enable
-set t_Co=16
+set t_Co=256
 set background=dark
-colorscheme default
+colorscheme gruvbox
 
 "Spaces and Tabs
 set tabstop=4
@@ -56,4 +56,4 @@ call plug#end()
 
 "Airline Settings
 let g:airline_powerline_fonts = 1
-let g:airline_theme='base16color'
+let g:airline_theme='gruvbox'
