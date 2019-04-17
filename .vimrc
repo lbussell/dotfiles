@@ -32,6 +32,9 @@ set incsearch
 set hlsearch
 set path+=**
 
+"for vimwiki
+set nocompatible
+
 "Switching between buffers
 :nnoremap <Right> :bnext<CR>
 :nnoremap <Left> :bprevious<CR>
@@ -52,6 +55,8 @@ Plug 'alvan/vim-closetag'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 "Airline Settings
