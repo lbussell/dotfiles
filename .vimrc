@@ -59,6 +59,11 @@ Plug 'scrooloose/nerdtree'
 Plug 'vimwiki/vimwiki'
 call plug#end()
 
+let g:vimwiki_list = [
+                        \{'path': '~/Dropbox\ (Gatech)/cs3600/cs3600.wiki'},
+                \]
+let g:vimwiki_html_header_numbering = 1
+
 "Airline Settings
 let g:airline_powerline_fonts = 1
 let g:airline_theme='base16'
