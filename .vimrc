@@ -18,7 +18,6 @@ set mouse=a
 set number
 set showcmd
 set cursorline
-filetype indent on
 set wildmenu
 set showmatch "show matching ([{}])
 set ttimeoutlen=50
@@ -57,6 +56,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vimwiki/vimwiki'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 let g:vimwiki_list = [
