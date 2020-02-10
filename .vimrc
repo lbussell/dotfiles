@@ -31,6 +31,10 @@ set incsearch
 set hlsearch
 set path+=**
 
+"Move swap file location
+set backupdir=~/.vim/backup/
+set directory=~/.vim/backup/
+
 "for vimwiki
 set nocompatible
 
