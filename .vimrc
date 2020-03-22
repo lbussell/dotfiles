@@ -1,7 +1,5 @@
 syntax enable
 set t_Co=256
-set background=dark
-colorscheme gruvbox
 
 "Spaces and Tabs
 set tabstop=4
@@ -32,8 +30,7 @@ set hlsearch
 set path+=**
 
 "Move swap file location
-set backupdir=~/.vim/backup/
-set directory=~/.vim/backup/
+set noswapfile
 
 "for vimwiki
 set nocompatible
@@ -62,6 +59,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'vimwiki/vimwiki'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'leafgarland/typescript-vim'
+Plug 'arzg/vim-colors-xcode'
 call plug#end()
 
 let g:vimwiki_list = [
@@ -72,3 +70,7 @@ let g:vimwiki_html_header_numbering = 1
 "Airline Settings
 let g:airline_powerline_fonts = 1
 let g:airline_theme='base16'
+
+set background=dark
+colorscheme xcodedark
+hi Normal guibg=NONE ctermbg=NONE
