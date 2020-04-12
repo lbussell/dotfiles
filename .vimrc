@@ -1,4 +1,4 @@
-syntax enable
+syntax on
 set t_Co=256
 
 "Spaces and Tabs
@@ -25,20 +25,18 @@ set hidden
 set guifont=RobotoMonoForPowerline-Regular:h12
 
 "Searching
+set ignorecase
+set smartcase
 set incsearch
 set hlsearch
 set path+=**
 
 "Move swap file location
 set noswapfile
+set nobackup
 
 "for vimwiki
 set nocompatible
-
-"Switching between buffers
-:nnoremap <Right> :bnext<CR>
-:nnoremap <Left> :bprevious<CR>
-:nnoremap <tab> <c-w><c-w>
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -56,10 +54,18 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+Plug 'Yggdroot/indentLine'
 Plug 'vimwiki/vimwiki'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'leafgarland/typescript-vim'
 Plug 'arzg/vim-colors-xcode'
+Plug 'dracula/vim', {'as': 'dracula'}
+Plug 'joshdick/onedark.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 call plug#end()
 
 let g:vimwiki_list = [
@@ -69,8 +75,14 @@ let g:vimwiki_html_header_numbering = 1
 
 "Airline Settings
 let g:airline_powerline_fonts = 1
-let g:airline_theme='base16'
+let g:airline_theme='onedark'
+
+let g:onedark_hide_endofbuffer = 1
+let g:onedark_termcolors = 256 
+let g:onedark_terminal_italics = 1
 
 set background=dark
-colorscheme xcodedark
+colorscheme onedark
+
 hi Normal guibg=NONE ctermbg=NONE
+
