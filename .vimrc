@@ -29,7 +29,7 @@ set ignorecase
 set smartcase
 set incsearch
 set hlsearch
-set path+=**
+"set path+e=**
 
 "Move swap file location
 set noswapfile
@@ -37,6 +37,10 @@ set nobackup
 
 "for vimwiki
 set nocompatible
+
+nnoremap <C-x> :bp<Bar>bd #<Cr>
+nnoremap <silent> <C-n> :bprev<CR>
+nnoremap <silent> <C-p> :bnext<CR>
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -74,6 +78,7 @@ let g:vimwiki_list = [
 let g:vimwiki_html_header_numbering = 1
 
 "Airline Settings
+let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='onedark'
 
