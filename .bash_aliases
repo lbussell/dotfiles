@@ -3,16 +3,19 @@
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+alias l="ls -lah"
+alias ll="ls -lah"
+
 alias g="git status"
 alias gs="git status"
+alias ga="git add"
 alias ys="yadm status"
+alias ya="yadm add"
 alias fpush="git push --force-with-lease"
 
 alias sls="screen -ls"
 alias ss="screen -S"
 alias sr="screen -r"
-
-TARBALL_DIR="/data/vcs/lbussell/tarballs/"
 
 alias darc="/home/logan/.dotnet/tools/darc"
 
@@ -28,4 +31,4 @@ alias c7="podman run --rm -v .:/data -w /data $CENTOS_7"
 GPG_TTY=$(tty)
 export GPG_TTY
 
-set -o vi
+cd ~/
