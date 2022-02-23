@@ -38,7 +38,7 @@ docker-run() {
     docker run -it --rm -v $(pwd):/data -w /data "$1"
 }
 
-cdls() {
+cdl() {
     cd "$1";
     ls -lah;
 }

@@ -1,0 +1,13 @@
+[user]
+	email = loganbussell@microsoft.com
+	name = Logan Bussell
+	signingkey = A6785347D2834033
+[alias]
+	logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    ci = commit
+    st = status
+    co = checkout
+    br = branch
+    v = !echo '\nRemotes:' && git remote -v && echo '\nBranches:' && git branch -v && echo '\nStatus:' && git status
+[commit]
+	gpgsign = true
