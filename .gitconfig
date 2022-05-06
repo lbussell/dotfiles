@@ -11,3 +11,9 @@
     v = !echo '\nRemotes:' && git remote -v && echo '\nBranches:' && git branch -v && echo '\nStatus:' && git status
 [commit]
 	gpgsign = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
