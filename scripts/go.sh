@@ -2,9 +2,8 @@
 set -euxo pipefail
 
 cd /data/installer
-./build.sh /p:ArcadeBuildTarball=true /p:TarballDir=/data/$1 /p:PreserveTarballGitFolders=true
+./build.sh /p:ArcadeBuildTarball=true /p:TarballDir=/data/tb/$1 /p:PreserveTarballGitFolders=true
 
-cd /data/$1
-cp /data/psb-cache/Private* packages/archive/
+cd /data/tb/$1
 ./prep.sh
 ./build.sh --online
