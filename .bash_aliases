@@ -44,6 +44,10 @@ docker-run() {
     docker run -it --rm -v $(pwd):/data -w /data "$1"
 }
 
+podman-run() {
+    podman run -it --rm -v $(pwd):/data -w /data "$1"
+}
+
 cdl() {
     cd "$1";
     ls -lah;
@@ -51,9 +55,6 @@ cdl() {
 
 GPG_TTY=$(tty)
 export GPG_TTY
-
-alias code="/mnt/c/Users/loganbussell/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
-alias subl='"/mnt/c/Program Files/Sublime Text/subl.exe"'
 
 export DOTNET_ROOT=$HOME/dotnet
 export PATH=$PATH:$HOME/dotnet
