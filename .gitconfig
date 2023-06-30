@@ -1,0 +1,11 @@
+[user]
+	name = Logan Bussell
+	email = loganbussell@microsoft.com
+[alias]
+	logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	ci = commit
+	st = status
+	co = checkout
+	br = branch
+	v = !echo '\nRemotes:' && git remote -v && echo '\nBranches:' && git branch -v && echo '\nStatus:' && git status
+	fpush = push --force-with-lease
