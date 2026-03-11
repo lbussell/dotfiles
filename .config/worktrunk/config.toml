@@ -15,3 +15,6 @@
 # Creates: ~/worktrees/myproject/feature-auth
 worktree-path = "~/w/{{ repo }}/{{ branch | sanitize }}"
 
+[pre-switch]
+fetch = "git fetch upstream --quiet 2>/dev/null || true; git fetch origin --quiet 2>/dev/null || true"
+
