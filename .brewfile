@@ -1,5 +1,4 @@
 brew "azure-cli"
-brew "chezmoi"
 brew "fd"
 brew "fzf"
 brew "gh"
