@@ -50,6 +50,11 @@ brew() {
   command brew bundle dump --force --no-vscode --file=~/.brewfile
   yadm add ~/.brewfile
   yadm diff --quiet --cached -- ~/.brewfile || yadm commit -m "brew $*"
+}
+
+# Install everything from the brewfile
+brew-sync() {
+  command brew bundle --file=~/.brewfile
   return $exit_code
 }
 
