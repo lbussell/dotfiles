@@ -77,9 +77,11 @@ ce() {
 
 # Add ~/src/bin to PATH
 export PATH="$HOME/src/bin:$PATH"
-alias wt="/Users/loganbussell/src/worktree-manager/artifacts/WorktreeManager/WorktreeManager"
-wtcd() { pushd "$(wt d "$1")" }
-wtcp() { pushd "$(wt d "$1")" && if [[ -n "$2" ]]; then copilot --yolo -i "$2"; else copilot --yolo; fi }
+
+# Deprecated: use worktrunk instead of custom `wt` tool
+# alias wt="/Users/loganbussell/src/worktree-manager/artifacts/WorktreeManager/WorktreeManager"
+# wtcd() { pushd "$(wt d "$1")" }
+# wtcp() { pushd "$(wt d "$1")" && if [[ -n "$2" ]]; then copilot --yolo -i "$2"; else copilot --yolo; fi }
 
 # MOTD: yadm dotfiles status
 () {
@@ -118,3 +120,5 @@ if [[ ":${PATH}:" != *":/Users/loganbussell/.config/agency/CurrentVersion:"* ]];
     export PATH="/Users/loganbussell/.config/agency/CurrentVersion:${PATH}"
 fi
 # END Agency MANAGED BLOCK
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
