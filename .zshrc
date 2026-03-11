@@ -81,6 +81,20 @@ alias wt="/Users/loganbussell/src/worktree-manager/artifacts/WorktreeManager/Wor
 wtcd() { pushd "$(wt d "$1")" }
 wtcp() { pushd "$(wt d "$1")" && if [[ -n "$2" ]]; then copilot --yolo -i "$2"; else copilot --yolo; fi }
 
+# MOTD: yadm dotfiles status
+() {
+  local ahead behind added deleted
+  local counts=$(yadm rev-list --left-right --count HEAD...@{upstream} 2>/dev/null)
+  [[ -z "$counts" ]] && return
+  read ahead behind <<< "$counts"
+  local stats=$(yadm diff --numstat HEAD 2>/dev/null | awk '{a+=$1; d+=$2} END {print a" "d}')
+  added=${stats%% *}
+  deleted=${stats##* }
+  : ${added:=0} ${deleted:=0}
+  local yellow=$'\e[33m' green=$'\e[32m' red=$'\e[31m' reset=$'\e[0m'
+  print "Dotfiles: ${yellow}↑${ahead}${reset} ${yellow}↓${behind}${reset} ${green}+${added}${reset}/${red}-${deleted}${reset}"
+}
+
 . "$HOME/.local/bin/env"
 
 # BEGIN Agency MANAGED BLOCK
