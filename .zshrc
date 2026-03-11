@@ -3,7 +3,7 @@ alias l='ls -la -G -1'
 alias ll='ls -lah -G'
 alias lg='lazygit'
 alias lgy='lazygit --git-dir="$HOME/.local/share/yadm/repo.git" --work-tree="$HOME"'
-alias cz='chezmoi'
+
 # Reload zshrc
 alias reload='source ~/.zshrc'
 # Easily put things in the clipboard
@@ -78,10 +78,8 @@ ce() {
 # Add ~/src/bin to PATH
 export PATH="$HOME/src/bin:$PATH"
 
-# Deprecated: use worktrunk instead of custom `wt` tool
-# alias wt="/Users/loganbussell/src/worktree-manager/artifacts/WorktreeManager/WorktreeManager"
-# wtcd() { pushd "$(wt d "$1")" }
-# wtcp() { pushd "$(wt d "$1")" && if [[ -n "$2" ]]; then copilot --yolo -i "$2"; else copilot --yolo; fi }
+# Worktrunk: create worktree and open copilot
+alias wsc='wt switch --create -x copilot'
 
 # MOTD: yadm dotfiles status
 () {
