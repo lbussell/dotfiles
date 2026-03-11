@@ -90,9 +90,24 @@ wtcp() { pushd "$(wt d "$1")" && if [[ -n "$2" ]]; then copilot --yolo -i "$2"; 
   local stats=$(yadm diff --numstat HEAD 2>/dev/null | awk '{a+=$1; d+=$2} END {print a" "d}')
   added=${stats%% *}
   deleted=${stats##* }
-  : ${added:=0} ${deleted:=0}
   local yellow=$'\e[33m' green=$'\e[32m' red=$'\e[31m' reset=$'\e[0m'
-  print "Dotfiles: ${yellow}↑${ahead}${reset} ${yellow}↓${behind}${reset} ${green}+${added}${reset}/${red}-${deleted}${reset}"
+  local sync_status
+  if (( ahead > 0 && behind > 0 )); then
+    sync_status="${yellow}↑${ahead}↓${behind}${reset}"
+  elif (( ahead > 0 )); then
+    sync_status="${yellow}↑${ahead}${reset}"
+  elif (( behind > 0 )); then
+    sync_status="${yellow}↓${behind}${reset}"
+  else
+    sync_status="${green}✓${reset}"
+  fi
+  local diff_status
+  if [[ -n "$added" || -n "$deleted" ]]; then
+    diff_status="${green}+${added}${reset}/${red}-${deleted}${reset}"
+  else
+    diff_status="-/-"
+  fi
+  print "Dotfiles: ${sync_status} ${diff_status}"
 }
 
 . "$HOME/.local/bin/env"
