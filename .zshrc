@@ -107,7 +107,8 @@ wtcp() { pushd "$(wt d "$1")" && if [[ -n "$2" ]]; then copilot --yolo -i "$2"; 
   else
     diff_status="-/-"
   fi
-  print "Dotfiles: ${sync_status} ${diff_status}"
+  local dim=$'\e[2m'
+  print "Dotfiles: ${sync_status} ${diff_status} ${dim}(status: run \`lgy\`)${reset}"
 }
 
 . "$HOME/.local/bin/env"
