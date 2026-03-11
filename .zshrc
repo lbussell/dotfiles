@@ -48,8 +48,8 @@ brew() {
   command brew "$@"
   local exit_code=$?
   command brew bundle dump --force --no-vscode --file=~/.brewfile
-  if ! yadm diff --quiet -- .brewfile; then
-    yadm add ~/.brewfile
+  yadm add ~/.brewfile
+  if ! yadm diff --quiet --cached -- .brewfile; then
     yadm commit -m "brew $*"
   fi
   return $exit_code
