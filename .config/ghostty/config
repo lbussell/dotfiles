@@ -1,6 +1,9 @@
 # Ghostty config
 # Reload config with cmd+shift+comma (ctrl+shift+comma on Linux)
 
+# Press cmd+comma to open the config in your current terminal
+keybind = super+,=text:ghostty +edit-config\n
+
 # Icon settings
 # macos-icon = official
 # macos-icon = blueprint
@@ -33,11 +36,10 @@ bell-features = system,attention,title
 # theme = Dimidium Light Dim
 # theme = light:Dimidium Light Dim,dark:Dimidium
 # theme = Penumbra Dark Contrast+
-theme = Penumbra Dark Contrast++
 # theme = light:Penumbra Light,dark:Penumbra Dark Contrast++
 # theme = Penumbra Light
 
+theme = light:Flexoki Light,dark:Penumbra Dark Contrast++
+
 font-size = 14
 font-thicken = true
-
-# theme = Flexoki Light
