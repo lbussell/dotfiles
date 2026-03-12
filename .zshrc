@@ -176,6 +176,12 @@ wti() {
   print "${dim}Worktree: wsc -c <name> --base upstream/main | upstream/nightly | wsc pr:123 | wti${reset}"
 }
 
+s() {
+  local choice
+  choice=$(ls -1 ~/src/ | gum filter --height 10 --header "Pick a directory:") || return 1
+  pushd ~/src/"$choice"
+}
+
 . "$HOME/.local/bin/env"
 
 # BEGIN Agency MANAGED BLOCK
