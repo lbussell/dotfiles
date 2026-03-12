@@ -1,0 +1,29 @@
+# Penumbra Dark Contrast++
+# https://github.com/nealmckee/penumbra
+
+# Base colors
+background = #181B1F
+foreground = #DEDEDE
+cursor-color = #DEDEDE
+selection-background = #3E4044
+selection-foreground = #DEDEDE
+
+# Normal colors (palette 0-7)
+palette = 0=#0D0F13
+palette = 1=#F58C81
+palette = 2=#54C794
+palette = 3=#A9B852
+palette = 4=#6EB2FD
+palette = 5=#E58CC5
+palette = 6=#00C4D7
+palette = 7=#DEDEDE
+
+# Bright colors (palette 8-15)
+palette = 8=#3E4044
+palette = 9=#F58C81
+palette = 10=#54C794
+palette = 11=#A9B852
+palette = 12=#6EB2FD
+palette = 13=#E58CC5
+palette = 14=#00C4D7
+palette = 15=#FFFDFB

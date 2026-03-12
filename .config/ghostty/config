@@ -1,0 +1,43 @@
+# Ghostty config
+# Reload config with cmd+shift+comma (ctrl+shift+comma on Linux)
+
+# Icon settings
+# macos-icon = official
+# macos-icon = blueprint
+# macos-icon = chalkboard
+# macos-icon = microchip
+# macos-icon = glass
+# macos-icon = holographic
+# macos-icon = paper
+# macos-icon = retro
+# macos-icon = xray
+# macos-icon = retro
+
+macos-icon = custom-style
+# macos-icon-frame = aluminum
+# macos-icon-frame = beige
+macos-icon-frame = plastic
+# macos-icon-frame = chrome
+# macos-icon-ghost-color = #EEEAFB
+macos-icon-ghost-color = #B9AAEE
+# macos-icon-ghost-color = #512BD4
+macos-icon-screen-color = #512BD4
+
+# Bell/Notification settings
+# Enable system bell sound for terminal notifications
+bell-features = system,attention,title
+
+# theme = Xcode Dark hc
+# theme = Subliminal
+# theme = Dimidium
+# theme = Dimidium Light Dim
+# theme = light:Dimidium Light Dim,dark:Dimidium
+# theme = Penumbra Dark Contrast+
+theme = Penumbra Dark Contrast++
+# theme = light:Penumbra Light,dark:Penumbra Dark Contrast++
+# theme = Penumbra Light
+
+font-size = 14
+font-thicken = true
+
+# theme = Flexoki Light
