@@ -47,9 +47,14 @@ preexec() {
 brew() {
   command brew "$@"
   local exit_code=$?
-  command brew bundle dump --force --no-vscode --file=~/.brewfile
-  yadm add ~/.brewfile
-  yadm diff --quiet --cached -- ~/.brewfile || yadm commit -m "brew $*"
+  case "$1" in
+    install|uninstall|remove|reinstall|upgrade)
+      command brew bundle dump --force --no-vscode --file=~/.brewfile
+      yadm add ~/.brewfile
+      yadm diff --quiet --cached -- ~/.brewfile || yadm commit -m "brew $*"
+      ;;
+  esac
+  return $exit_code
 }
 
 # Install everything from the brewfile
