@@ -42,4 +42,4 @@ bell-features = system,attention,title
 theme = light:Flexoki Light,dark:Penumbra Dark Contrast++
 
 font-size = 14
-font-thicken = true
+font-thicken = false
