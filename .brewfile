@@ -9,6 +9,7 @@ brew "neovim"
 brew "node"
 brew "notation"
 brew "oras"
+brew "powershell", link: false
 brew "ripgrep"
 brew "syft"
 brew "terminal-notifier"
