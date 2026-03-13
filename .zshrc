@@ -191,3 +191,6 @@ fi
 # END Agency MANAGED BLOCK
 
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+
+# Open dotfiles repo in browser
+alias dotfiles="open https://github.com/lbussell/dotfiles"
