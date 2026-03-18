@@ -6,3 +6,11 @@ ce() {
 }
 
 register_command "Copilot" "ce" "Open Copilot CLI in scratchpad (ephemeral)"
+
+dotcopilot() {
+  pushd ~ > /dev/null
+  COPILOT_CUSTOM_INSTRUCTIONS_DIRS="$HOME/dotfiles-scripts/agents" copilot "$@"
+  popd > /dev/null
+}
+
+register_command "Copilot" "dotcopilot" "Open Copilot CLI with dotfiles agent instructions"
