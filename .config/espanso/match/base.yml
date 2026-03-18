@@ -12,7 +12,7 @@
 
 matches:
   # Simple text replacement
-  - trigger: ":q"
+  - trigger: ":btw"
     replace: "General question (no changes required): "
 
   # Print the current date
