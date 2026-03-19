@@ -33,6 +33,29 @@ brights = [
   "#cecdc3",  # bright white
 ]
 
+[colors.tab_bar]
+background = "#cecdc3"
+
+[colors.tab_bar.active_tab]
+bg_color = "#fffcf0"
+fg_color = "#100f0f"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#cecdc3"
+fg_color = "#6f6e69"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#b7b5ac"
+fg_color = "#100f0f"
+
+[colors.tab_bar.new_tab]
+bg_color = "#cecdc3"
+fg_color = "#6f6e69"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#b7b5ac"
+fg_color = "#100f0f"
+
 [metadata]
 name = "Flexoki Light"
 author = "Steph Ango (ported from Ghostty)"

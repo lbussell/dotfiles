@@ -32,6 +32,29 @@ brights = [
   "#FFFDFB",  # bright white
 ]
 
+[colors.tab_bar]
+background = "#0D0F13"
+
+[colors.tab_bar.active_tab]
+bg_color = "#181B1F"
+fg_color = "#DEDEDE"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#0D0F13"
+fg_color = "#DEDEDE"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#3E4044"
+fg_color = "#DEDEDE"
+
+[colors.tab_bar.new_tab]
+bg_color = "#0D0F13"
+fg_color = "#DEDEDE"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#3E4044"
+fg_color = "#DEDEDE"
+
 [metadata]
 name = "Penumbra Dark Contrast++"
 author = "Neal McKee (ported from Ghostty)"
