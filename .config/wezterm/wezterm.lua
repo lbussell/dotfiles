@@ -15,7 +15,27 @@ local function scheme_for_appearance(appearance)
   end
 end
 
+local tab_bar_colors = {
+  ["Flexoki Light"] = {
+    background = "#cecdc3",
+    active_tab = { bg_color = "#fffcf0", fg_color = "#100f0f" },
+    inactive_tab = { bg_color = "#cecdc3", fg_color = "#6f6e69" },
+    inactive_tab_hover = { bg_color = "#b7b5ac", fg_color = "#100f0f" },
+    new_tab = { bg_color = "#cecdc3", fg_color = "#6f6e69" },
+    new_tab_hover = { bg_color = "#b7b5ac", fg_color = "#100f0f" },
+  },
+  ["Penumbra Dark Contrast++"] = {
+    background = "#0D0F13",
+    active_tab = { bg_color = "#181B1F", fg_color = "#DEDEDE" },
+    inactive_tab = { bg_color = "#0D0F13", fg_color = "#DEDEDE" },
+    inactive_tab_hover = { bg_color = "#3E4044", fg_color = "#DEDEDE" },
+    new_tab = { bg_color = "#0D0F13", fg_color = "#DEDEDE" },
+    new_tab_hover = { bg_color = "#3E4044", fg_color = "#DEDEDE" },
+  },
+}
+
 config.color_scheme = "Flexoki Light"
+config.colors = { tab_bar = tab_bar_colors["Flexoki Light"] }
 
 -- Dynamically switch on macOS light/dark mode change
 wezterm.on("window-config-reloaded", function(window)
@@ -23,6 +43,7 @@ wezterm.on("window-config-reloaded", function(window)
   local scheme = scheme_for_appearance(window:get_appearance())
   if overrides.color_scheme ~= scheme then
     overrides.color_scheme = scheme
+    overrides.colors = { tab_bar = tab_bar_colors[scheme] }
     window:set_config_overrides(overrides)
   end
 end)
