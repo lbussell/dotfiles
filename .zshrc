@@ -65,3 +65,7 @@ if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)
 # Open dotfiles repo in browser
 alias dotfiles="open https://github.com/lbussell/dotfiles"
 
+
+if [ -f "$HOME/Library/Application Support/dnvm/env" ]; then
+    . "$HOME/Library/Application Support/dnvm/env"
+fi
