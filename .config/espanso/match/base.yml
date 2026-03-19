@@ -11,26 +11,24 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
 
 matches:
-  # Simple text replacement
-  - trigger: ":btw"
+  - trigger: "/btw"
     replace: "General question (no changes required): "
 
-  # Print the current date
-  - trigger: ":date"
-    replace: "{{mydate}}"
-    vars:
-      - name: mydate
-        type: date
-        params:
-          format: "%m/%d/%Y"
+  - trigger: "/dti"
+    replace: "https://github.com/dotnet/docker-tools/issues/"
+  - trigger: "/dtp"
+    replace: "https://github.com/dotnet/dotnet-tools/pulls/"
 
-  # Print the output of a shell command
-  - trigger: ":shell"
-    replace: "{{output}}"
-    vars:
-      - name: output
-        type: shell
-        params:
-          cmd: "echo 'Hello from your shell'"
+  - trigger: "/ddi"
+    replace: "https://github.com/dotnet/dotnet-docker/issues/"
+  - trigger: "/ddp"
+    replace: "https://github.com/dotnet/dotnet-docker/pulls/"
+  - trigger: "/ddd"
+    replace: "https://github.com/dotnet/dotnet-docker/discussions/"
 
-  # And much more! For more information, visit the docs: https://espanso.org/docs/
+  - trigger: "/dfi"
+    replace: "https://github.com/microsoft/dotnet-framework-docker/issues/"
+  - trigger: "/dfp"
+    replace: "https://github.com/microsoft/dotnet-framework-docker/pulls/"
+  - trigger: "/dfd"
+    replace: "https://github.com/microsoft/dotnet-framework-docker/discussions/"
