@@ -1,0 +1,38 @@
+# Penumbra Dark Contrast++
+# Ported from Ghostty theme — https://github.com/nealmckee/penumbra
+
+[colors]
+background = "#181B1F"
+foreground = "#DEDEDE"
+cursor_bg = "#DEDEDE"
+cursor_fg = "#181B1F"
+cursor_border = "#DEDEDE"
+selection_bg = "#3E4044"
+selection_fg = "#DEDEDE"
+
+ansi = [
+  "#0D0F13",  # black
+  "#F58C81",  # red
+  "#54C794",  # green
+  "#A9B852",  # yellow
+  "#6EB2FD",  # blue
+  "#E58CC5",  # magenta
+  "#00C4D7",  # cyan
+  "#DEDEDE",  # white
+]
+
+brights = [
+  "#3E4044",  # bright black
+  "#F58C81",  # bright red
+  "#54C794",  # bright green
+  "#A9B852",  # bright yellow
+  "#6EB2FD",  # bright blue
+  "#E58CC5",  # bright magenta
+  "#00C4D7",  # bright cyan
+  "#FFFDFB",  # bright white
+]
+
+[metadata]
+name = "Penumbra Dark Contrast++"
+author = "Neal McKee (ported from Ghostty)"
+origin_url = "https://github.com/nealmckee/penumbra"

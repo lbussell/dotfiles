@@ -1,0 +1,39 @@
+# Flexoki Light
+# Ported from Ghostty bundled theme — https://github.com/kepano/flexoki
+
+[colors]
+background = "#fffcf0"
+foreground = "#100f0f"
+dim_foreground = "#6f6e69"
+cursor_bg = "#100f0f"
+cursor_fg = "#fffcf0"
+cursor_border = "#100f0f"
+selection_bg = "#cecdc3"
+selection_fg = "#100f0f"
+
+ansi = [
+  "#100f0f",  # black
+  "#af3029",  # red
+  "#66800b",  # green
+  "#ad8301",  # yellow
+  "#205ea6",  # blue
+  "#a02f6f",  # magenta
+  "#24837b",  # cyan
+  "#6f6e69",  # white
+]
+
+brights = [
+  "#b7b5ac",  # bright black
+  "#d14d41",  # bright red
+  "#879a39",  # bright green
+  "#d0a215",  # bright yellow
+  "#4385be",  # bright blue
+  "#ce5d97",  # bright magenta
+  "#3aa99f",  # bright cyan
+  "#cecdc3",  # bright white
+]
+
+[metadata]
+name = "Flexoki Light"
+author = "Steph Ango (ported from Ghostty)"
+origin_url = "https://github.com/kepano/flexoki"
