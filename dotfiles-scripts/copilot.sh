@@ -8,12 +8,14 @@ ce() {
 register_command "Copilot" "ce" "Open Copilot CLI in scratchpad (ephemeral)"
 
 dotcopilot() {
-  pushd ~ > /dev/null
-  COPILOT_CUSTOM_INSTRUCTIONS_DIRS="$HOME/dotfiles-scripts/agents" copilot "$@"
-  popd > /dev/null
+  pushd ~ > /dev/null || return
+  copilot "$@"
+  local status=$?
+  popd > /dev/null || return "$status"
+  return "$status"
 }
 
-register_command "Copilot" "dotcopilot" "Open Copilot CLI with dotfiles agent instructions"
+register_command "Copilot" "dotcopilot" "Open Copilot CLI in dotfiles home"
 
 alias c='copilot'
 alias cy='copilot --yolo'
