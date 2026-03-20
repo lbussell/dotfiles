@@ -4,14 +4,13 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 
 config.use_fancy_tab_bar = false
+config.tab_max_width = 32
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 14.0
-
-if appearance.is_dark() then
-	config.color_scheme = "Penumbra Dark Contrast++"
-else
-	config.color_scheme = "Flexoki Light"
-end
+config.window_decorations = "RESIZE"
+config.window_frame = {
+	font_size = 14.0,
+}
 
 local tab_bar_colors = {
 	["Flexoki Light"] = {
@@ -32,7 +31,29 @@ local tab_bar_colors = {
 	},
 }
 
-config.colors = { tab_bar = tab_bar_colors[config.color_scheme] }
+local function scheme_for_appearance(is_dark)
+	if is_dark then
+		return "Penumbra Dark Contrast++"
+	else
+		return "Flexoki Light"
+	end
+end
+
+-- Set initial theme
+local initial_scheme = scheme_for_appearance(appearance.is_dark())
+config.color_scheme = initial_scheme
+config.colors = { tab_bar = tab_bar_colors[initial_scheme] }
+
+-- Dynamically switch color scheme + tab bar when system appearance changes
+wezterm.on("window-config-reloaded", function(window, pane)
+	local overrides = window:get_config_overrides() or {}
+	local scheme = scheme_for_appearance(window:get_appearance():find("Dark"))
+	if overrides.color_scheme ~= scheme then
+		overrides.color_scheme = scheme
+		overrides.colors = { tab_bar = tab_bar_colors[scheme] }
+		window:set_config_overrides(overrides)
+	end
+end)
 
 -- Ghostty-compatible keybindings for multiplexing/tiling (macOS defaults)
 config.keys = {
