@@ -4,7 +4,6 @@
 [colors]
 background = "#fffcf0"
 foreground = "#100f0f"
-dim_foreground = "#6f6e69"
 cursor_bg = "#100f0f"
 cursor_fg = "#fffcf0"
 cursor_border = "#100f0f"
