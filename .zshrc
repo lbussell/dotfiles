@@ -36,7 +36,6 @@ alias vim='nvim'
 export PATH="$PATH:/Users/loganbussell/.dotnet/tools"
 
 # Atuin configuration
-. "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh)"
 
 # Helper functions/commands (sourced from ~/dotfiles-scripts/)
@@ -52,7 +51,8 @@ dotfiles_motd
 # Add ~/src/bin to PATH
 export PATH="$HOME/src/bin:$PATH"
 
-. "$HOME/.local/bin/env"
+# ~/.local/bin for standalone tools (e.g. claude)
+export PATH="$HOME/.local/bin:$PATH"
 
 # BEGIN Agency MANAGED BLOCK
 if [[ ":${PATH}:" != *":/Users/loganbussell/.config/agency/CurrentVersion:"* ]]; then
