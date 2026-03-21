@@ -1,5 +1,9 @@
 #!/bin/bash
 set -eu
 
-echo "==> Initializing submodules..."
-yadm submodule update --init --recursive
+system=$(uname -s)
+
+if [ "$system" = "Darwin" ]; then
+  echo "==> Initializing submodules..."
+  yadm submodule update --init --recursive
+fi
