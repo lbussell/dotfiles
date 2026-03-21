@@ -1,0 +1,4 @@
+[submodule "/Users/loganbussell/.hammerspoon/Spoons/PaperWM.spoon"]
+	path = /Users/loganbussell/.hammerspoon/Spoons/PaperWM.spoon
+	url = https://github.com/lbussell/PaperWM.spoon
+	branch = dev
