@@ -42,6 +42,12 @@ PaperWM:bindHotkeys({
     -- Misc --          { { "ctrl", "alt", "cmd", "shift" }, "*" },
 	refresh_windows =   { { "ctrl", "alt", "cmd"          }, "p" },
 
+    -- Stacking --      { { "ctrl", "alt", "cmd", "shift" }, "*" },
+	stack =             { { "ctrl", "alt", "cmd"          }, "i" },
+	unstack =           { { "ctrl", "alt", "cmd"          }, "o" },
+	stack_next =        { {         "alt", "cmd"          }, "]" },
+	stack_prev =        { {         "alt", "cmd"          }, "[" },
+
 	------------
 	-- Unused --
 	------------
@@ -122,3 +128,18 @@ updateMenubar(paperWMMenubar)
 paperWMMenubar:setClickCallback(togglePaperWM)
 
 hs.hotkey.bind({ "ctrl", "alt", "cmd", "shift" }, "P", togglePaperWM)
+
+-- Alignment toggle menu bar button
+local function updateAlignmentMenubar(menubar)
+	menubar:setTitle(PaperWM.focus_mode == "center" and "CENTER" or "EDGE")
+end
+
+local function toggleAlignment()
+	local next = PaperWM.focus_mode == "center" and "edge" or "center"
+	PaperWM:setFocusMode(next)
+	updateAlignmentMenubar(alignmentMenubar)
+end
+
+alignmentMenubar = hs.menubar.new()
+updateAlignmentMenubar(alignmentMenubar)
+alignmentMenubar:setClickCallback(toggleAlignment)
