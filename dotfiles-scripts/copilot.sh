@@ -20,7 +20,6 @@ register_command "Copilot" "dotcopilot" "Open Copilot CLI in dotfiles home"
 alias c='copilot'
 alias cy='copilot --yolo'
 alias cr='copilot --resume'
-alias continue='copilot --resume'
 alias cont='copilot --resume'
 
 register_command "Copilot" "c" "Alias for copilot"
