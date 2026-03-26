@@ -69,3 +69,8 @@ alias dotfiles="open https://github.com/lbussell/dotfiles"
 if [ -f "$HOME/Library/Application Support/dnvm/env" ]; then
     . "$HOME/Library/Application Support/dnvm/env"
 fi
+# Worktree Manager - interactively pick a git worktree and jump to it
+w() {
+    local dir
+    dir=$(WorktreeManager) && pushd "$dir"
+}
