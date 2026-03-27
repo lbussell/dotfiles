@@ -31,8 +31,7 @@ new() {
   echo "Base: $base"
 
   # Step 4: Fetch remotes
-  echo "Fetching remotes..."
-  git fetch --all 2>/dev/null
+  gum spin --title "Fetching remotes..." -- git fetch --all
 
   # Step 5: Feature name
   local feature
