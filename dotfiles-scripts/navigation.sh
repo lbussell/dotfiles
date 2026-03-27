@@ -14,3 +14,6 @@ t() {
 
 register_command "Navigation" "s" "Fuzzy-pick a directory under ~/src and pushd into it"
 register_command "Navigation" "t" "Fuzzy-pick a tmux session and attach"
+
+alias back=popd
+register_command "Navigation" "back" "Return to previous directory (popd)"
