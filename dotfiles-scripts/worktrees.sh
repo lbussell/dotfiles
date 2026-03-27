@@ -76,3 +76,6 @@ new() {
 }
 
 register_command "Worktrunk" "new" "Quick worktree creation wizard (repo → fetch → branch → create)"
+
+alias wn=new
+register_command "Worktrunk" "wn" "Alias for new"
