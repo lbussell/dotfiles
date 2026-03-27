@@ -5,9 +5,14 @@ w() {
   worktrees=$(git worktree list 2>/dev/null) || { echo "Not in a git repo."; return 1; }
   [[ -z "$worktrees" ]] && { echo "No worktrees found."; return 1; }
 
-  local selection
-  selection=$(echo "$worktrees" | gum filter --height 10 --header "Pick a worktree:") || return 0
-  local dir="${selection%% *}"
+  local branches
+  branches=$(echo "$worktrees" | sed -n 's/.*\[\(.*\)\]/\1/p')
+  [[ -z "$branches" ]] && { echo "No branches found."; return 1; }
+
+  local branch
+  branch=$(echo "$branches" | gum filter --height 10 --header "Pick a worktree:") || return 0
+  local dir
+  dir=$(echo "$worktrees" | grep "\[$branch\]" | awk '{print $1}')
   pushd "$dir"
 }
 
