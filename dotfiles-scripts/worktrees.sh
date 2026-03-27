@@ -1,4 +1,11 @@
-# new-worktree.sh — Quick worktree creation wizard
+# worktrees.sh — Worktree helpers
+
+w() {
+  local dir
+  dir=$(WorktreeManager) && pushd "$dir"
+}
+
+register_command "Worktrunk" "w" "Interactively pick a git worktree and jump to it"
 
 new() {
   # Step 1: Pick a repo (pre-fill with current repo if inside ~/src/)
