@@ -7,6 +7,19 @@ w() {
 
 register_command "Worktrunk" "w" "Interactively pick a git worktree and jump to it"
 
+wl() {
+  local worktrees
+  worktrees=$(git worktree list 2>/dev/null) || { echo "Not in a git repo."; return 1; }
+  [[ -z "$worktrees" ]] && { echo "No worktrees found."; return 1; }
+
+  local selection
+  selection=$(echo "$worktrees" | gum filter --height 10 --header "Pick a worktree:") || return 0
+  local dir="${selection%% *}"
+  pushd "$dir"
+}
+
+register_command "Worktrunk" "wl" "Pick a local worktree and switch to it"
+
 new() {
   # Step 1: Pick a repo (pre-fill with current repo if inside ~/src/)
   local current_repo=""
