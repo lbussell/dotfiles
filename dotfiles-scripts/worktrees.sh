@@ -10,7 +10,7 @@ w() {
   [[ -z "$branches" ]] && { echo "No branches found."; return 1; }
 
   local branch
-  branch=$(echo "$branches" | gum filter --height 10 --header "Pick a worktree:") || return 0
+  branch=$(echo "$branches" | gum choose --header "Pick a worktree:") || return 0
   local dir
   dir=$(echo "$worktrees" | grep "\[$branch\]" | awk '{print $1}')
   pushd "$dir"
