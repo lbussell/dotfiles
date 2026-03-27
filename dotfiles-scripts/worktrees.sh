@@ -1,6 +1,6 @@
 # worktrees.sh — Worktree helpers
 
-w() {
+ws() {
   local worktrees
   worktrees=$(git worktree list 2>/dev/null) || { echo "Not in a git repo."; return 1; }
   [[ -z "$worktrees" ]] && { echo "No worktrees found."; return 1; }
@@ -16,7 +16,19 @@ w() {
   pushd "$dir"
 }
 
-register_command "Worktrunk" "w" "Interactively pick a git worktree and jump to it"
+register_command "Worktrunk" "ws" "Pick a worktree and switch to it"
+
+wl() {
+  local worktrees
+  worktrees=$(git worktree list 2>/dev/null) || { echo "Not in a git repo."; return 1; }
+  [[ -z "$worktrees" ]] && { echo "No worktrees found."; return 1; }
+
+  echo "$worktrees" \
+    | awk '{path=$1; sha=$2; gsub(/\[|\]/, "", $3); branch=$3; print branch","path","sha}' \
+    | gum table --columns "Branch,Path,Commit" --print
+}
+
+register_command "Worktrunk" "wl" "List worktrees in a table"
 
 new() {
   # Step 1: Pick a repo (pre-fill with current repo if inside ~/src/)
