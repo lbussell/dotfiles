@@ -1,5 +1,6 @@
 brew "atuin"
 brew "azure-cli"
+brew "bat"
 brew "fd"
 brew "fzf"
 brew "gh"
