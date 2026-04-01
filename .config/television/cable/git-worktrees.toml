@@ -1,0 +1,33 @@
+[metadata]
+name = "git-worktrees"
+description = "Browse and manage git worktrees"
+requirements = ["git"]
+
+[source]
+command = '''git worktree list | while read -r p h b; do m=$(stat -f %m "$p"); d=$(( $(date +%s) - m )); if [ $d -lt 60 ]; then a="${d}s"; elif [ $d -lt 3600 ]; then a="$((d/60))m"; elif [ $d -lt 86400 ]; then a="$((d/3600))h"; elif [ $d -lt 604800 ]; then a="$((d/86400))d"; else a="$((d/604800))w"; fi; printf '%s\t\e[33m(%s)\e[0m \e[32m%s\e[0m \e[34m%s\e[0m\t%s\n' "$m" "$a" "$b" "${p/$HOME/~}" "$p"; done | sort -rn -t$'\t' -k1,1 | cut -f2-'''
+ansi = true
+output = "{split:\\t:1}"
+no_sort = true
+
+[preview]
+command = [
+  "git -C '{split:\\t:1}' log --oneline --graph --decorate -20 --color=always",
+  "git -C '{split:\\t:1}' status",
+]
+
+[ui.preview_panel]
+size = 55
+
+[keybindings]
+ctrl-d = "actions:remove"
+ctrl-e = "actions:edit"
+
+[actions.remove]
+description = "Remove worktree"
+command = "git worktree remove '{split:\\t:1}'"
+mode = "fork"
+
+[actions.edit]
+description = "Open in editor"
+command = "$EDITOR '{split:\\t:1}'"
+mode = "execute"

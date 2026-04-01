@@ -70,7 +70,7 @@ new() {
   echo "Feature: $feature"
 
   # Step 5: Create worktree
-  local cmd="wt switch -c -b $base $feature"
+  local cmd="wt-old switch -c -b $base $feature"
   gum style --faint "→ $cmd"
   eval "$cmd"
 }
