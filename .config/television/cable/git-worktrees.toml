@@ -20,14 +20,8 @@ size = 55
 
 [keybindings]
 ctrl-d = "actions:remove"
-ctrl-e = "actions:edit"
 
 [actions.remove]
 description = "Remove worktree"
 command = "git worktree remove '{split:\\t:1}'"
 mode = "fork"
-
-[actions.edit]
-description = "Open in editor"
-command = "$EDITOR '{split:\\t:1}'"
-mode = "execute"
