@@ -8,6 +8,7 @@ command = '''git worktree list | while read -r p h b; do m=$(stat -f %m "$p"); d
 ansi = true
 output = "{split:\\t:1}"
 no_sort = true
+watch = 2.0
 
 [preview]
 command = [
