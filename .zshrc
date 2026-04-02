@@ -38,21 +38,11 @@ export PATH="$PATH:/Users/loganbussell/.dotnet/tools"
 # Atuin configuration
 eval "$(atuin init zsh)"
 
-# Initialize worktrunk, then rename its wt function to wt-old
-# so our tv-based wt function takes precedence
-if command -v wt >/dev/null 2>&1; then
-  eval "$(command wt config shell init zsh)"
-  functions[wt-old]="$functions[wt]"
-  unfunction wt 2>/dev/null
-  if (( $+functions[compdef] )); then compdef _wt_lazy_complete wt-old; fi
-fi
-
 # Helper functions/commands (sourced from ~/dotfiles-scripts/)
 source "$HOME/dotfiles-scripts/index.sh"
 
 # Aliases that reference helper functions
 alias c="copilot"
-alias wsc='wt-old switch -x copilot'
 
 # MOTD
 dotfiles_motd
