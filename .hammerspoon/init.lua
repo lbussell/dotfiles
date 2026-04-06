@@ -66,10 +66,10 @@ PaperWM:bindHotkeys({
 	-- focus_window_9 = { { "cmd", "shift" }, "9" },
 
 	-- Switch to space by number
-	-- switch_space_1 = { { "alt", "cmd" }, "1" },
-	-- switch_space_2 = { { "alt", "cmd" }, "2" },
-	-- switch_space_3 = { { "alt", "cmd" }, "3" },
-	-- switch_space_4 = { { "alt", "cmd" }, "4" },
+	switch_space_1 = { { "alt", "cmd" }, "1" },
+	switch_space_2 = { { "alt", "cmd" }, "2" },
+	switch_space_3 = { { "alt", "cmd" }, "3" },
+	switch_space_4 = { { "alt", "cmd" }, "4" },
 	-- switch_space_5 = { { "alt", "cmd" }, "5" },
 	-- switch_space_6 = { { "alt", "cmd" }, "6" },
 	-- switch_space_7 = { { "alt", "cmd" }, "7" },
@@ -77,10 +77,10 @@ PaperWM:bindHotkeys({
 	-- switch_space_9 = { { "alt", "cmd" }, "9" },
 
 	-- Move focused window to space
-	-- move_window_1 = { { "alt", "cmd", "shift" }, "1" },
-	-- move_window_2 = { { "alt", "cmd", "shift" }, "2" },
-	-- move_window_3 = { { "alt", "cmd", "shift" }, "3" },
-	-- move_window_4 = { { "alt", "cmd", "shift" }, "4" },
+	move_window_1 = { { "alt", "cmd", "shift" }, "1" },
+	move_window_2 = { { "alt", "cmd", "shift" }, "2" },
+	move_window_3 = { { "alt", "cmd", "shift" }, "3" },
+	move_window_4 = { { "alt", "cmd", "shift" }, "4" },
 	-- move_window_5 = { { "alt", "cmd", "shift" }, "5" },
 	-- move_window_6 = { { "alt", "cmd", "shift" }, "6" },
 	-- move_window_7 = { { "alt", "cmd", "shift" }, "7" },
@@ -99,15 +99,18 @@ PaperWM.lift_window = { "alt", "cmd", "shift" }
 -- Hold + drag window to scroll all windows in the space
 PaperWM.drag_window = { "alt", "cmd" }
 PaperWM.window_gap = 0
+PaperWM.window_peek = 64
+
 PaperWM:start()
 
 local paperWMRunning = true
 
 local function updateMenubar(menubar)
+	-- on or off
 	if paperWMRunning then
-		menubar:setTitle("PWM ON")
+		menubar:setTitle("📄◉")
 	else
-		menubar:setTitle("PWM OFF")
+		menubar:setTitle("📄◎")
 	end
 end
 
@@ -128,10 +131,12 @@ updateMenubar(paperWMMenubar)
 paperWMMenubar:setClickCallback(togglePaperWM)
 
 hs.hotkey.bind({ "ctrl", "alt", "cmd", "shift" }, "P", togglePaperWM)
+hs.window.animationDuration = 0 -- seconds
 
 -- Alignment toggle menu bar button
 local function updateAlignmentMenubar(menubar)
-	menubar:setTitle(PaperWM.focus_mode == "center" and "CENTER" or "EDGE")
+	-- center or edge aligned
+	menubar:setTitle(PaperWM.focus_mode == "center" and "📄⬇️" or "📄️↔️")
 end
 
 local function toggleAlignment()
