@@ -9,4 +9,8 @@ wt() {
   dir=$(tv git-worktrees) && pushd "$dir"
 }
 
+w() {
+  tv git-repos --height 20
+}
+
 register_command "Git" "wt" "Pick a git worktree and pushd into it"
