@@ -107,6 +107,14 @@ config.keys = {
 	{ key = "8", mods = "CMD", action = act.ActivateTab(7) },
 	-- Cmd+9           → go to last tab
 	{ key = "9", mods = "CMD", action = act.ActivateTab(-1) },
+	-- Cmd+Option+Shift+[ → move tab left
+	{ key = "[", mods = "CMD|OPT|SHIFT", action = act.MoveTabRelative(-1) },
+	-- Cmd+Option+Shift+] → move tab right
+	{ key = "]", mods = "CMD|OPT|SHIFT", action = act.MoveTabRelative(1) },
+
+	-- ── Command palette ─────────────────────────────────────────────────
+	-- Cmd+Shift+P     → open command palette
+	{ key = "p", mods = "CMD|SHIFT", action = act.ActivateCommandPalette },
 }
 
 return config
