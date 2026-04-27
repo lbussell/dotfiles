@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
 	[string]$PackageManifest,
-	[string]$PackageManifestUrl = 'https://raw.githubusercontent.com/lbussell/dotfiles/main/winget-packages.json'
+	[string]$PackageManifestUrl = 'https://raw.githubusercontent.com/lbussell/dotfiles/main/.windows/winget-packages.json'
 )
 
 $ErrorActionPreference = 'Stop'
