@@ -39,7 +39,7 @@ export PATH="$PATH:/Users/loganbussell/.dotnet/tools"
 eval "$(atuin init zsh)"
 
 # Helper functions/commands (sourced from ~/dotfiles-scripts/)
-source "$HOME/dotfiles-scripts/index.sh"
+source "$HOME/scripts/index.sh"
 
 # Aliases that reference helper functions
 alias c="copilot"
