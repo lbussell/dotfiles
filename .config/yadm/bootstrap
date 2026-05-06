@@ -1,9 +1,0 @@
-#!/bin/bash
-set -eu
-
-system=$(uname -s)
-
-if [ "$system" = "Darwin" ]; then
-  echo "==> Initializing submodules..."
-  yadm submodule update --init --recursive
-fi
