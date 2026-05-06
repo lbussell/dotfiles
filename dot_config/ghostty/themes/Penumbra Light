@@ -1,0 +1,30 @@
+# Penumbra Light (balanced)
+# https://github.com/nealmckee/penumbra
+
+# Base colors
+background = #FFF7ED
+foreground = #636363
+cursor-color = #636363
+selection-background = #F2E6D4
+selection-foreground = #636363
+
+# Normal colors (palette 0-7)
+palette = 0=#FFFDFB
+palette = 1=#CA736C
+palette = 2=#47A477
+palette = 3=#8D9741
+palette = 4=#5794D0
+palette = 5=#BC73A4
+palette = 6=#00A2AF
+# palette = 7=#636363
+palette = 7=#000000
+
+# Bright colors (palette 8-15)
+palette = 8=#F2E6D4
+palette = 9=#CA736C
+palette = 10=#47A477
+palette = 11=#8D9741
+palette = 12=#5794D0
+palette = 13=#BC73A4
+palette = 14=#00A2AF
+palette = 15=#24272B

@@ -1,0 +1,12 @@
+##
+## atuin config (https://atuin.sh/)
+## documentation: https://docs.atuin.sh/cli/configuration/config/
+##
+
+## which style to use
+## possible values: auto, full, compact
+style = "compact"
+
+## the maximum number of lines the interface should take up
+## set it to 0 to always go full screen
+inline_height = 15
