@@ -6,7 +6,11 @@
 {{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
 {{- "" -}}
 
-{{- $immutable := eq .chezmoi.osRelease.id "bazzite" "kinoite" -}}
+{{- $osReleaseID := "" -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+{{-   $osReleaseID = .chezmoi.osRelease.id -}}
+{{- end -}}
+{{- $immutable := eq $osReleaseID "bazzite" "kinoite" -}}
 {{- $exedev := eq .chezmoi.username "exedev" -}}
 
 {{- $osID := .chezmoi.os -}}
