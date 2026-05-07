@@ -3,8 +3,8 @@
 export CLICOLOR=1 # Colors in ls
 export EDITOR='nvim'
 
-# User aliases
-[ -f ~/.config/shell/aliases.bash ] && . ~/.config/shell/aliases.bash
+# User aliases (chezmoi-generated)
+[ -f ~/.config/shell/aliases.sh ] && . ~/.config/shell/aliases.sh
 # dnvm (dotnet version manager)
 [ -f "$HOME/Library/Application Support/dnvm/env" ] && . "$HOME/Library/Application Support/dnvm/env"
 # User scripts
