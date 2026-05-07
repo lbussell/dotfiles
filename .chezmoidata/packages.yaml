@@ -33,8 +33,7 @@ homebrew:
       - ripgrep
       - bat
       - fd
-    casks:
-      - copilot-cli
+    casks: []
 
 winget:
   - oven-sh.bun.bun
