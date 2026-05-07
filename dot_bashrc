@@ -1,9 +1,11 @@
-# .bashrc
+# ~/.bashrc — minimal; real config in ~/.bash_aliases
 
 # Global/system-wide definitions
 [ -f /etc/bashrc ] && . /etc/bashrc
-# User aliases
-[ -f ~/.config/shell/aliases.bash ] && . ~/.config/shell/aliases.bash
+
+# User aliases and functions
+[ -f ~/.bash_aliases ] && . ~/.bash_aliases
+
 # dnvm (dotnet version manager)
 [ -f "$HOME/.local/share/dnvm/env" ] && . "$HOME/.local/share/dnvm/env"
 
@@ -13,18 +15,6 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
 fi
 export PATH
 
-# User specific aliases and functions
-if [ -d ~/.bashrc.d ]; then
-    for rc in ~/.bashrc.d/*; do
-        if [ -f "$rc" ]; then
-            . "$rc"
-        fi
-    done
-fi
-unset rc
-
 export PATH="$HOME/.aspire/bin:$PATH"
 export PATH="$HOME/.bun/bin:$PATH"
-export PATH=$HOME/.opencode/bin:$PATH
-
-alias reload=". ~/.bashrc"
+export PATH="$HOME/.opencode/bin:$PATH"
