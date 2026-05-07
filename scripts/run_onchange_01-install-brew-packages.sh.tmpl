@@ -1,0 +1,32 @@
+{{- if ne .chezmoi.os "windows" -}}
+#!/bin/bash
+{{ template "install-package-header" }}
+{{ template "brew-shellenv" . }}
+
+log "Installing Homebrew packages via brew bundle"
+{{ $excludes := get .homebrew.exclude .chezmoi.username | default list -}}
+brew bundle --file=/dev/stdin <<EOF
+{{ range .homebrew.unix.formulae -}}
+{{ if not (has . $excludes) -}}
+brew "{{ . }}"
+{{ end -}}
+{{ end -}}
+{{ range .homebrew.unix.casks -}}
+{{ if not (has . $excludes) -}}
+cask "{{ . }}"
+{{ end -}}
+{{ end -}}
+{{- if eq .chezmoi.os "darwin" }}
+{{ range .homebrew.darwin.formulae -}}
+{{ if not (has . $excludes) -}}
+brew "{{ . }}"
+{{ end -}}
+{{ end -}}
+cask "ghostty@tip"
+cask "git-credential-manager"
+cask "barutsrb/tap/omniwm"
+{{ end -}}
+EOF
+
+log "Homebrew packages installed successfully"
+{{- end -}}
