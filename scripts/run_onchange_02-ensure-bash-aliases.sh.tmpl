@@ -1,8 +1,4 @@
 #!/bin/bash
-# Ensure ~/.bashrc has the chezmoi-managed block with brew shellenv, PATH,
-# aliases, bashrc.d, and reload.
-# Runs on chezmoi init and when this script changes.
-
 set -euo pipefail
 
 BASHRC="$HOME/.bashrc"
@@ -22,27 +18,10 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
 fi
 export PATH
 
-export PATH="$HOME/.aspire/bin:$PATH"
-export PATH="$HOME/.bun/bin:$PATH"
-export PATH="$HOME/.opencode/bin:$PATH"
-
-# dnvm (dotnet version manager)
-[ -f "$HOME/.local/share/dnvm/env" ] && . "$HOME/.local/share/dnvm/env"
-
-# User aliases (chezmoi-generated)
+# Generated aliases
 [ -f ~/.config/shell/aliases.sh ] && . ~/.config/shell/aliases.sh
-
-# User specific aliases and functions
-if [ -d ~/.bashrc.d ]; then
-    for rc in ~/.bashrc.d/*; do
-        if [ -f "$rc" ]; then
-            . "$rc"
-        fi
-    done
-fi
-unset rc
-
 alias reload="source ~/.bashrc"
+
 # END chezmoi-managed block
 ENDBLOCK
 )
@@ -58,13 +37,13 @@ fi
 EXISTING=$(sed -n "/^$BLOCK_START$/,/^$BLOCK_END$/p" "$BASHRC" 2>/dev/null || true)
 
 if [ -z "$EXISTING" ]; then
-    # No block yet — append it
+    # No block yet, append it
     printf '\n%s\n' "$BLOCK" >> "$BASHRC"
     echo "Added chezmoi-managed block to $BASHRC"
 elif [ "$EXISTING" = "$BLOCK" ]; then
     echo "$BASHRC already has up-to-date chezmoi block — nothing to do"
 else
-    # Block exists but is stale — replace it
+    # Block exists but is stale, replace it
     TMPFILE=$(mktemp)
     sed "/^$BLOCK_START$/,/^$BLOCK_END$/d" "$BASHRC" > "$TMPFILE"
     printf '\n%s\n' "$BLOCK" >> "$TMPFILE"
