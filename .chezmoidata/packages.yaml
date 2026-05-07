@@ -58,6 +58,47 @@ dnf:
     - fd-find
     - wl-clipboard
 
+examples:
+  mac:
+    os: darwin
+    username: loganbussell
+    hostname: macbook-air-m3
+    ephemeral: false
+    email: github@loganbussell.com
+    work: false
+    immutable: false
+    headless: false
+    minimal: false
+    personal: true
+    osid: darwin
+    package_manager: brew
+  exedev:
+    os: linux
+    username: exedev
+    hostname: harbor-ruby
+    ephemeral: true
+    email: github@loganbussell.com
+    work: false
+    immutable: false
+    headless: true
+    minimal: true
+    personal: false
+    osid: linux-ubuntu
+    package_manager: apt
+  bazzite:
+    os: linux
+    username: loganbussell
+    hostname: bazzite
+    ephemeral: false
+    email: github@loganbussell.com
+    work: false
+    immutable: true
+    headless: false
+    minimal: false
+    personal: false
+    osid: linux-bazzite
+    package_manager: brew
+
 winget:
   - oven-sh.bun.bun
   - astral-sh.uv

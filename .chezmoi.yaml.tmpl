@@ -72,6 +72,8 @@
 {{- end -}}
 
 data:
+  os: {{ .chezmoi.os | quote }}
+  username: {{ .chezmoi.username | quote }}
   ephemeral: {{ $ephemeral }}
   email: {{ $email | quote }}
   work: {{ $work }}
