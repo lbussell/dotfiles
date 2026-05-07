@@ -71,6 +71,7 @@
 {{-   end -}}
 {{- end -}}
 
+sourceDir: {{ printf "%s/home" .chezmoi.sourceDir | quote }}
 data:
   os: {{ .chezmoi.os | quote }}
   username: {{ .chezmoi.username | quote }}

@@ -23,7 +23,7 @@ USER ${USERNAME}
 WORKDIR /home/${USERNAME}
 
 # Initialize and apply dotfiles non-interactively
-RUN chezmoi init --apply
+RUN chezmoi init --apply /home/${USERNAME}/.local/share/chezmoi
 
 # Verify key binaries are available
 RUN bash -c 'command -v nvim && command -v rg && command -v fd'
