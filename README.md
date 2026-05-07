@@ -2,7 +2,7 @@
 
 My dotfiles, managed with [chezmoi](https://github.com/twpayne/chezmoi).
 
-The actual chezmoi source tree lives under `home/`. Repository-level infrastructure can live outside that directory.
+The repository root contains infrastructure. A root-level `.chezmoiroot` points chezmoi at `home/` for the actual source tree.
 
 ## Install
 
@@ -10,7 +10,7 @@ The actual chezmoi source tree lives under `home/`. Repository-level infrastruct
 sh -c "$(curl -fsLS https://get.chezmoi.io)" -- init --apply lbussell
 ```
 
-The generated chezmoi config points `sourceDir` at `home/`.
+The root-level `.chezmoiroot` file points chezmoi at `home/`.
 
 ## Render example outputs
 

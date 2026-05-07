@@ -2,7 +2,6 @@
 set -euo pipefail
 
 ROOT=$(git rev-parse --show-toplevel)
-HOME_ROOT="$ROOT/home"
 OUTDIR="$ROOT/.rendered-examples"
 STATE_BASE="$ROOT/.cache/rendered-examples"
 
@@ -16,7 +15,7 @@ for name in $examples; do
   mkdir -p "$dest"
   config=$(mktemp)
   cat > "$config" <<EOF
-sourceDir: $HOME_ROOT
+sourceDir: $ROOT
 destDir: $dest
 data:
   os: $(chezmoi data | jq -r --arg n "$name" '.examples[$n].os')
