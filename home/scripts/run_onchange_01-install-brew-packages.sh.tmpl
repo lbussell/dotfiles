@@ -1,4 +1,4 @@
-{{- if ne .chezmoi.os "windows" -}}
+{{- if and (ne .chezmoi.os "windows") (eq .package_manager "brew") -}}
 #!/bin/bash
 {{ template "install-package-header" }}
 {{ template "brew-shellenv" . }}
@@ -29,4 +29,23 @@ cask "barutsrb/tap/omniwm"
 EOF
 
 log "Homebrew packages installed successfully"
+{{- end -}}
+
+{{- if and (eq .chezmoi.os "linux") (eq .package_manager "apt") -}}
+#!/bin/bash
+{{ template "install-package-header" }}
+
+log "Installing APT packages"
+sudo apt-get update
+sudo apt-get install -y {{ join " " .apt.packages }}
+log "APT packages installed successfully"
+{{- end -}}
+
+{{- if and (eq .chezmoi.os "linux") (eq .package_manager "dnf") -}}
+#!/bin/bash
+{{ template "install-package-header" }}
+
+log "Installing DNF packages"
+sudo dnf install -y {{ join " " .dnf.packages }}
+log "DNF packages installed successfully"
 {{- end -}}

@@ -1,6 +1,6 @@
 [user]
 	name = Logan Bussell
-{{- if .is_work }}
+{{- if .work }}
 	email = loganbussell@microsoft.com
 {{ else }}
 	email = github@loganbussell.com
@@ -12,8 +12,8 @@
 {{- if eq .chezmoi.os "linux" }}
 [credential "https://github.com"]
 	helper =
-	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
+	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
 	helper =
-	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
+	helper = !gh auth git-credential
 {{ end -}}

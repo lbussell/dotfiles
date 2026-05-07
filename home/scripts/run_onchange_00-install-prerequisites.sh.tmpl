@@ -4,10 +4,14 @@
 {{ template "install-package-header" }}
 
 {{ $os := .chezmoi.os -}}
-{{ $isWork := .is_work -}}
+{{ $isWork := .work -}}
+{{ $packageManager := .package_manager | default "none" -}}
 
 {{ range $name, $script := .scripts -}}
 {{ $install := true -}}
+{{ if and (eq $name "homebrew") (ne $packageManager "brew") -}}
+  {{ $install = false -}}
+{{ end -}}
 {{ if hasKey $script "os" -}}
   {{ if not (has $os $script.os) -}}
     {{ $install = false -}}

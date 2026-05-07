@@ -1,0 +1,3 @@
+{{- if eq .package_manager "brew" }}
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{- end }}

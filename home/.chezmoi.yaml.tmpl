@@ -1,0 +1,86 @@
+
+{{/* boolean feature tags */}}
+{{- $ephemeral := false -}}{{/* true if this machine is ephemeral, e.g. a cloud or VM instance */}}
+{{- $work := false -}}{{/* true if this machine is a work machine */}}
+{{- $headless := false -}}{{/* true if this machine does not have a screen and keyboard */}}
+{{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
+{{- "" -}}
+
+{{- $immutable := eq .chezmoi.osRelease.id "bazzite" "kinoite" -}}
+{{- $exedev := eq .chezmoi.username "exedev" -}}
+
+{{- $osID := .chezmoi.os -}}
+{{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
+{{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
+{{/* detect GitHub codespaces, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */}}
+{{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (eq .chezmoi.username "root" "ubuntu" "vagrant" "vscode" "exedev") -}}
+{{-   $ephemeral = true -}}
+{{-   $headless = true -}}
+{{- end -}}
+
+{{/* work around unreliable hostname on darwin */}}
+{{- $hostname := .chezmoi.hostname -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $hostname := output "scutil" "--get" "LocalHostName" | trim -}}
+{{- end -}}
+
+{{- if eq .chezmoi.os "windows" -}}
+{{-   $ephemeral = true -}}
+{{- end -}}
+
+{{- if not $ephemeral -}}
+{{-   if eq $hostname "macbook-air-m3" -}}
+{{-     $personal = true -}}
+{{-   else if eq $hostname "thinkpad" -}}
+{{-     $personal = true -}}
+{{-   else if eq $hostname "ubuntu" -}}
+{{-     $headless = true -}}
+{{-     $personal = true -}}
+{{-   else if eq $hostname "zrh-mpl3s" -}}
+{{-     $work = true -}}
+{{-   else if stdinIsATTY -}}
+{{-     $headless = promptBoolOnce . "headless" "headless" -}}
+{{-     $ephemeral = promptBoolOnce . "ephemeral" "ephemeral" -}}
+{{-   else -}}
+{{-     $ephemeral = true -}}
+{{-     $headless = true -}}
+{{-   end -}}
+{{- end -}}
+
+{{- $email := "github@loganbussell.com" -}}
+{{- if $work -}}
+{{-   $email = "loganbussell@microsoft.com" -}}
+{{- end -}}
+
+{{- $packageManager := "none" -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $packageManager = "brew" -}}
+{{- else if eq .chezmoi.os "windows" -}}
+{{-   $packageManager = "winget" -}}
+{{- else if eq .chezmoi.os "linux" -}}
+{{-   if $immutable -}}
+{{-     $packageManager = "brew" -}}
+{{-   else if hasKey .chezmoi.osRelease "id" -}}
+{{-     if eq .chezmoi.osRelease.id "ubuntu" "debian" "linuxmint" "pop" -}}
+{{-       $packageManager = "apt" -}}
+{{-     else if eq .chezmoi.osRelease.id "fedora" "rhel" "centos" "rocky" "almalinux" -}}
+{{-       $packageManager = "dnf" -}}
+{{-     end -}}
+{{-   end -}}
+{{- end -}}
+
+data:
+  os: {{ .chezmoi.os | quote }}
+  username: {{ .chezmoi.username | quote }}
+  ephemeral: {{ $ephemeral }}
+  email: {{ $email | quote }}
+  work: {{ $work }}
+  immutable: {{ $immutable }}
+  headless: {{ $headless }}
+  minimal: {{ $headless }}
+  hostname: {{ $hostname | quote }}
+  personal: {{ $personal }}
+  osid: {{ $osID | quote }}
+  package_manager: {{ $packageManager | quote }}

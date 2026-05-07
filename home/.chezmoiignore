@@ -1,0 +1,7 @@
+README.md
+LICENSE
+test/**
+
+.rendered-examples/**
+.cache/rendered-examples/**
+scripts/render-examples.sh
