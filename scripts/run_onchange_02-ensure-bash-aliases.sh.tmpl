@@ -9,7 +9,7 @@ BLOCK_END="# END chezmoi-managed block"
 BLOCK=$(cat <<'ENDBLOCK'
 # BEGIN chezmoi-managed block
 
-# Homebrew shell environment
+# Package manager shell environment
 {{ template "brew-shellenv" . }}
 
 # User-specific PATH

@@ -36,6 +36,28 @@ homebrew:
       - fd
     casks: []
 
+apt:
+  packages:
+    - tmux
+    - gh
+    - neovim
+    - just
+    - ripgrep
+    - bat
+    - fd-find
+    - wl-clipboard
+
+dnf:
+  packages:
+    - tmux
+    - gh
+    - neovim
+    - just
+    - ripgrep
+    - bat
+    - fd-find
+    - wl-clipboard
+
 winget:
   - oven-sh.bun.bun
   - astral-sh.uv
