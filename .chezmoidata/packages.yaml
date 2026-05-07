@@ -1,0 +1,95 @@
+scripts:
+  - name: homebrew
+    description: "Install Homebrew/Linuxbrew"
+    check: "command -v brew"
+    env:
+      NONINTERACTIVE: "1"
+    url: "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+
+packages:
+  # Programming languages
+  bun: # Better NodeJS
+    homebrew: oven-sh/bun/bun
+    linuxbrew: oven-sh/bun/bun
+    winget: oven-sh.bun.bun
+  uv: # Python
+    homebrew: uv
+    linuxbrew: uv
+    winget: astral-sh.uv
+  dotnet: # Use dnvm on linux/mac
+    winget: Microsoft.DotNet.SDK.10
+
+  # Development tools
+  gh:
+    homebrew: gh
+    linuxbrew: gh
+    winget: GitHub.cli
+  lazygit:
+    homebrew: lazygit
+    linuxbrew: lazygit
+    winget: JesseDuffield.lazygit
+  neovim:
+    homebrew: neovim
+    linuxbrew: neovim
+    winget: Neovim.Neovim
+  atuin: # Shell history
+    homebrew: atuin
+    linuxbrew: atuin
+    winget: Atuinsh.Atuin
+  just: # Command runner
+    homebrew: just
+    linuxbrew: just
+    winget: Casey.Just
+  tmux: # typically preinstalled on linux
+    homebrew: tmux
+
+  # Container tools
+  notation:
+    homebrew: notation
+    linuxbrew: notation
+    winget: NotaryProject.Notation
+  oras:
+    homebrew: oras
+    linuxbrew: oras
+    winget: ORASProject.ORAS
+
+  # Charmbracelet CLI/TUI tools
+  gum:
+    homebrew: gum
+    linuxbrew: gum
+    winget: charmbracelet.gum
+  glow:
+    homebrew: glow
+    linuxbrew: glow
+    winget: charmbracelet.glow
+  vhs:
+    homebrew: vhs
+    linuxbrew: vhs
+    winget: charmbracelet.vhs
+
+  # television is a nice fuzzy finder TUI
+  television:
+    homebrew: television
+    linuxbrew: television
+    winget: alexpasmantier.television
+  # television dependencies:
+  ripgrep:
+    homebrew: ripgrep
+    linuxbrew: ripgrep
+    winget: BurntSushi.ripgrep.MSVC
+  bat:
+    homebrew: bat
+    linuxbrew: bat
+    winget: sharkdp.bat
+  fd:
+    homebrew: fd
+    linuxbrew: fd
+    winget: sharkdp.fd
+
+  # Windows-only stuff
+  uutils: # Rust coreutils on Windows
+    winget: uutils.coreutils
+
+bun:
+  # Pi coding agent: https://pi.dev/
+  - "@mariozechner/pi-coding-agent"
