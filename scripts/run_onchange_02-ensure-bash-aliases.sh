@@ -1,24 +1,61 @@
 #!/bin/bash
-# Ensure ~/.bashrc sources ~/.bash_aliases. Runs on chezmoi init and when this script changes.
+# Ensure ~/.bashrc sources ~/.config/shell/aliases.sh.
+# Uses a managed block so the script can be updated without leaving stale lines.
+# Runs on chezmoi init and when this script changes.
 
 set -euo pipefail
 
 BASHRC="$HOME/.bashrc"
-SOURCE_LINE='[ -f ~/.bash_aliases ] && . ~/.bash_aliases'
+BLOCK_START="# BEGIN chezmoi-managed aliases block"
+BLOCK_END="# END chezmoi-managed aliases block"
+
+# Write the desired block to a temp file
+BLOCK_FILE=$(mktemp)
+cat > "$BLOCK_FILE" <<'ENDBLOCK'
+# BEGIN chezmoi-managed aliases block
+# User aliases (chezmoi-generated)
+[ -f ~/.config/shell/aliases.sh ] && . ~/.config/shell/aliases.sh
+
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+    for rc in ~/.bashrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+unset rc
+
+alias reload="source ~/.bashrc"
+# END chezmoi-managed aliases block
+ENDBLOCK
+
+DESIRED=$(cat "$BLOCK_FILE")
+rm -f "$BLOCK_FILE"
 
 # Create .bashrc if it doesn't exist
 if [ ! -f "$BASHRC" ]; then
-    echo "$SOURCE_LINE" > "$BASHRC"
-    echo "Created $BASHRC with bash_aliases source line"
+    printf '%s\n' "$DESIRED" > "$BASHRC"
+    echo "Created $BASHRC with chezmoi-managed aliases block"
     exit 0
 fi
 
-# Already present? Nothing to do
-if grep -qF "$SOURCE_LINE" "$BASHRC"; then
-    echo "$BASHRC already sources ~/.bash_aliases — nothing to do"
-    exit 0
-fi
+# Extract existing managed block, if any
+EXISTING=$(sed -n "/^$BLOCK_START$/,/^$BLOCK_END$/p" "$BASHRC" 2>/dev/null || true)
 
-# Append the source line
-echo "$SOURCE_LINE" >> "$BASHRC"
-echo "Appended bash_aliases source line to $BASHRC"
+if [ -n "$EXISTING" ]; then
+    if [ "$EXISTING" = "$DESIRED" ]; then
+        echo "$BASHRC already has up-to-date chezmoi aliases block — nothing to do"
+        exit 0
+    fi
+    # Block exists but is stale — delete old block and re-append
+    TMPFILE=$(mktemp)
+    sed "/^$BLOCK_START$/,/^$BLOCK_END$/d" "$BASHRC" > "$TMPFILE"
+    printf '\n%s\n' "$DESIRED" >> "$TMPFILE"
+    mv "$TMPFILE" "$BASHRC"
+    echo "Updated chezmoi-managed aliases block in $BASHRC"
+else
+    # No block yet — append it
+    printf '\n%s\n' "$DESIRED" >> "$BASHRC"
+    echo "Added chezmoi-managed aliases block to $BASHRC"
+fi
