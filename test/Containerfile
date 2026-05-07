@@ -1,0 +1,28 @@
+FROM fedora:42
+
+ARG USERNAME=testuser
+
+RUN dnf install -y \
+    curl \
+    git \
+    procps-ng \
+    sudo \
+    && dnf clean all
+
+RUN useradd -m -s /bin/bash "${USERNAME}" \
+    && echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/nopasswd
+
+# Install chezmoi
+RUN sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
+
+# Copy local source tree as the chezmoi source
+COPY --chown=${USERNAME}:${USERNAME} . /home/${USERNAME}/.local/share/chezmoi
+
+USER ${USERNAME}
+WORKDIR /home/${USERNAME}
+
+# Initialize and apply dotfiles non-interactively
+RUN chezmoi init --apply --promptBool is_work=false
+
+# Verify key binaries are available (source brew shellenv first)
+RUN bash -c 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv 2>/dev/null || $HOME/.linuxbrew/bin/brew shellenv 2>/dev/null)" && command -v brew && command -v nvim && command -v rg && command -v fd'

@@ -15,6 +15,10 @@ homebrew:
   darwin:
     formulae:
       - tmux
+      # Charmbracelet
+      - gum
+      - glow
+      - vhs
   unix:
     formulae:
       - oven-sh/bun/bun
@@ -26,9 +30,6 @@ homebrew:
       - just
       - notation
       - oras
-      - gum
-      - glow
-      - vhs
       - television
       - ripgrep
       - bat
@@ -55,6 +56,11 @@ winget:
   - BurntSushi.ripgrep.MSVC
   - sharkdp.bat
   - sharkdp.fd
+
+go:
+  - github.com/charmbracelet/vhs@latest
+  - github.com/charmbracelet/gum@latest
+  - github.com/charmbracelet/vhs@latest
 
 bun:
   # Pi coding agent: https://pi.dev/
