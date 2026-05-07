@@ -1,17 +1,30 @@
 # .zshrc
 
-export CLICOLOR=1 # Colors in ls
+# Prompt: green username, directory, and %
+setopt PROMPT_SUBST
+PROMPT='%F{green}[%f%F{green}%n%f %1~%F{green}]%f%F{green}%# %f'
+
+# Reload zshrc
+alias reload='source ~/.zshrc'
+
+# Colors in ls
+export CLICOLOR=1
+
+# Use neovim instead of vim
 export EDITOR='nvim'
+alias vim='nvim'
 
-# User aliases (chezmoi-generated)
-[ -f ~/.config/shell/aliases.sh ] && . ~/.config/shell/aliases.sh
-# dnvm (dotnet version manager)
-[ -f "$HOME/Library/Application Support/dnvm/env" ] && . "$HOME/Library/Application Support/dnvm/env"
-# User scripts
-[ -f "$HOME/.scripts/index.sh" ] && . "$HOME/.scripts/index.sh"
+# .NET SDK tools
+export PATH="$PATH:/Users/loganbussell/.dotnet/tools"
 
+# Atuin configuration
+eval "$(atuin init zsh)"
+
+# Helper functions/commands (sourced from ~/dotfiles-scripts/)
+source "$HOME/dotfiles-scripts/index.sh"
+
+# ~/.local/bin for standalone tools
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$PATH:$HOME/.dotnet/tools"
 
 # BEGIN Agency MANAGED BLOCK
 if [[ ":${PATH}:" != *":/Users/loganbussell/.config/agency/CurrentVersion:"* ]]; then
@@ -19,10 +32,8 @@ if [[ ":${PATH}:" != *":/Users/loganbussell/.config/agency/CurrentVersion:"* ]];
 fi
 # END Agency MANAGED BLOCK
 
-eval "$(atuin init zsh)"
+[ -f "$HOME/Library/Application Support/dnvm/env" ] && . "$HOME/Library/Application Support/dnvm/env"
+[ -f "$HOME/.zsh_aliases" ] && . "$HOME/.zsh_aliases"
 
-# Prompt: green username, directory, and %
-setopt PROMPT_SUBST
-PROMPT='%F{green}[%f%F{green}%n%f %1~%F{green}]%f%F{green}%# %f'
-
-alias reload='. ~/.zshrc'
+# Added by get-aspire-cli.sh
+export PATH="$HOME/.aspire/bin:$PATH"

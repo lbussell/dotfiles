@@ -1,38 +1,31 @@
-# Desired state for shell configuration
-
 aliases:
-  # Common shell commands
+  - from: "cz"
+    to:
+      default: "chezmoi"
+  - from: ".j"
+    to:
+      default: "just --justfile ~/.justfile --working-directory ."
+  - from: "help"
+    to:
+      default: ".j"
   - from: "ll"
     to:
       default: "ls -la"
       windows: "Get-ChildItem"
-
-  # Git
   - from: "g"
     to:
       default: "git status"
   - from: "lg"
     to:
       default: "lazygit"
-
-  # Editing
   - from: "vim"
     to:
       default: "nvim"
-
-  # AI
   - from: "co"
     to:
       default: "copilot --yolo"
-
-  # Clipboard
   - from: "clip"
     to:
       linux: "wl-copy"
       darwin: "pbcopy"
       windows: "clip"
-
-  # Chezmoi
-  - from: "cz"
-    to:
-      default: "chezmoi"
