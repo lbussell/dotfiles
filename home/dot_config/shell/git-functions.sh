@@ -82,3 +82,87 @@ w() {
       ;;
   esac
 }
+
+wn() {
+  local base_choice
+  local branch
+  local remote
+  local remote_branch
+  local remote_branches
+  local remotes
+  local repo_name
+  local repo_root
+  local start_point
+  local origin_url
+  local worktree_path
+  local worktrees_dir
+
+  git rev-parse --git-common-dir >/dev/null 2>&1 || {
+    echo "Not in a git repository."
+    return 1
+  }
+
+  repo_root=$(git rev-parse --show-toplevel) || return 1
+  origin_url=$(git config --get remote.origin.url 2>/dev/null)
+  if [ -n "$origin_url" ]; then
+    repo_name=$(printf '%s\n' "$origin_url" | sed 's#/*$##; s#\.git$##; s#^.*/##; s#^.*:##')
+  fi
+  if [ -z "$repo_name" ]; then
+    repo_name=$(basename "$repo_root") || return 1
+  fi
+
+  if [ -n "$WORKTREES_DIR" ]; then
+    worktrees_dir=$WORKTREES_DIR
+  else
+    worktrees_dir="$HOME/w"
+  fi
+  case "$worktrees_dir" in
+    "~") worktrees_dir=$HOME ;;
+    "~/"*) worktrees_dir="$HOME/${worktrees_dir#"~/"}" ;;
+  esac
+
+  remotes=$(git remote) || return 1
+  base_choice=$(
+    {
+      echo "HEAD"
+      printf '%s\n' "$remotes" | sed '/^$/d; s/^/remote: /'
+    } | gum choose --height 10 --header "Create new worktree from:" --no-show-help
+  ) || return 1
+
+  case "$base_choice" in
+    HEAD)
+      start_point=HEAD
+      ;;
+    remote:\ *)
+      remote=${base_choice#remote: }
+      git fetch "$remote" || return 1
+
+      remote_branches=$(git for-each-ref --format='%(refname)' "refs/remotes/$remote" | awk -v prefix="refs/remotes/$remote/" '
+        $0 == prefix "HEAD" { next }
+        index($0, prefix) == 1 { print substr($0, length(prefix) + 1) }
+      ') || return 1
+      if [ -z "$remote_branches" ]; then
+        echo "No branches found for remote '$remote'."
+        return 1
+      fi
+
+      remote_branch=$(printf '%s\n' "$remote_branches" | gum filter --height 10 --header "Pick a branch from $remote:" --no-show-help) || return 1
+      start_point="$remote/$remote_branch"
+      ;;
+    *)
+      echo "Invalid start point: $base_choice"
+      return 1
+      ;;
+  esac
+
+  branch=$(gum input --prompt "Branch name: " --placeholder "feature/my-branch") || return 1
+  if [ -z "$branch" ]; then
+    echo "Branch name is required."
+    return 1
+  fi
+
+  worktree_path="$worktrees_dir/$repo_name/$branch"
+  mkdir -p "$(dirname "$worktree_path")" || return 1
+  git worktree add -b "$branch" "$worktree_path" "$start_point" || return 1
+  pushd "$worktree_path"
+}

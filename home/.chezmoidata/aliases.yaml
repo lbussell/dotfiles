@@ -24,7 +24,7 @@ aliases:
   - from: "vim"
     to:
       default: "nvim"
-  - from: "co"
+  - from: "copilot"
     to:
       default: "copilot --yolo"
   - from: "clip"
