@@ -167,6 +167,6 @@ wn() {
   worktree_path="$worktrees_dir/$repo_name/$branch"
   echo "Selected worktree path: $worktree_path"
   mkdir -p "$(dirname "$worktree_path")" || return 1
-  git worktree add -b "$branch" "$worktree_path" "$start_point" || return 1
+  git worktree add --no-track -b "$branch" "$worktree_path" "$start_point" || return 1
   pushd "$worktree_path"
 }
