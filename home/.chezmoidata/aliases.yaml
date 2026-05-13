@@ -12,9 +12,12 @@ aliases:
     to:
       default: "ls -la"
       windows: "Get-ChildItem"
-  - from: "g"
+  - from: "b"
     to:
-      default: "git status"
+      default: "popd"
+  - from: "up"
+    to:
+      default: "cd .."
   - from: "lg"
     to:
       default: "lazygit"

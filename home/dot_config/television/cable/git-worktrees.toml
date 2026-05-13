@@ -4,25 +4,42 @@ description = "Browse and manage git worktrees"
 requirements = ["git"]
 
 [source]
-command = '''git worktree list | while read -r p h b; do m=$(stat -f %m "$p"); d=$(( $(date +%s) - m )); if [ $d -lt 60 ]; then a="${d}s"; elif [ $d -lt 3600 ]; then a="$((d/60))m"; elif [ $d -lt 86400 ]; then a="$((d/3600))h"; elif [ $d -lt 604800 ]; then a="$((d/86400))d"; else a="$((d/604800))w"; fi; printf '%s\t\e[33m(%s)\e[0m \e[32m%s\e[0m \e[34m%s\e[0m\t%s\n' "$m" "$a" "$b" "${p/$HOME/~}" "$p"; done | sort -rn -t$'\t' -k1,1 | cut -f2-'''
-ansi = true
-output = "{split:\\t:1}"
+command = "git worktree list | sed \"s|$HOME|~|g\""
+output = "{split: :0}"
 no_sort = true
-watch = 2.0
 
 [preview]
 command = [
-  "git -C '{split:\\t:1}' log --oneline --graph --decorate -20 --color=always",
-  "git -C '{split:\\t:1}' status",
+  "git -C {0} log --oneline --graph --decorate -20 --color=always",
 ]
 
 [ui.preview_panel]
 size = 55
 
 [keybindings]
+enter = "actions:cd"
+ctrl-e = "actions:code"
+ctrl-g = "actions:lg"
 ctrl-d = "actions:remove"
 
+[actions.cd]
+description = "Open a new shell in the selected worktree"
+command = "cd {0} && $SHELL"
+mode = "execute"
+
+[actions.code]
+description = "Open the worktree in vscode"
+command = "code {0}"
+shell = "bash"
+mode = "fork"
+
+[actions.lg]
+description = "Open the worktree in lazygit"
+command = "cd {0} && lazygit"
+shell = "bash"
+mode = "fork"
+
 [actions.remove]
-description = "Remove worktree"
-command = "git worktree remove '{split:\\t:1}'"
+description = "Remove the selected worktree"
+command = "gum confirm 'Remove worktree {0}?' && git worktree remove '{0}'"
 mode = "fork"

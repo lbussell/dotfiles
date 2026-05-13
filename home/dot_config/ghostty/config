@@ -38,8 +38,15 @@ bell-features = system,attention,title
 # theme = Penumbra Dark Contrast+
 # theme = light:Penumbra Light,dark:Penumbra Dark Contrast++
 # theme = Penumbra Light
-
-theme = light:Flexoki Light,dark:Penumbra Dark Contrast++
+# theme = light:Flexoki Light,dark:Penumbra Dark Contrast++
+theme = light:One Half Light,dark:Catppuccin Mocha
+# theme = iTerm2 Solarized Light
 
 font-size = 14
-font-thicken = false
+# font-family = Monaspace Krypton Var
+# font-family = Monaspace Xenon Var
+# font-family = Monaspace Argon Var
+font-family = Monaspace Neon Var
+# font-family = Monaspace Radon Var
+# font-thicken = false
+

@@ -20,9 +20,6 @@ export PATH="$PATH:/Users/loganbussell/.dotnet/tools"
 # Atuin configuration
 eval "$(atuin init zsh)"
 
-# Helper functions/commands (sourced from ~/dotfiles-scripts/)
-source "$HOME/dotfiles-scripts/index.sh"
-
 # ~/.local/bin for standalone tools
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -34,6 +31,7 @@ fi
 
 [ -f "$HOME/Library/Application Support/dnvm/env" ] && . "$HOME/Library/Application Support/dnvm/env"
 [ -f "$HOME/.zsh_aliases" ] && . "$HOME/.zsh_aliases"
+[ -f "$HOME/.config/shell/git-functions.sh" ] && . "$HOME/.config/shell/git-functions.sh"
 
 # Added by get-aspire-cli.sh
 export PATH="$HOME/.aspire/bin:$PATH"
