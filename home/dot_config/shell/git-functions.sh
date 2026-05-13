@@ -128,6 +128,7 @@ wn() {
       printf '%s\n' "$remotes" | sed '/^$/d; s/^/remote: /'
     } | gum choose --height 10 --header "Create new worktree from:" --no-show-help
   ) || return 1
+  echo "Selected start: $base_choice"
 
   case "$base_choice" in
     HEAD)
@@ -147,6 +148,7 @@ wn() {
       fi
 
       remote_branch=$(printf '%s\n' "$remote_branches" | gum filter --height 10 --header "Pick a branch from $remote:" --no-show-help) || return 1
+      echo "Selected remote branch: $remote_branch"
       start_point="$remote/$remote_branch"
       ;;
     *)
@@ -160,8 +162,10 @@ wn() {
     echo "Branch name is required."
     return 1
   fi
+  echo "Selected branch name: $branch"
 
   worktree_path="$worktrees_dir/$repo_name/$branch"
+  echo "Selected worktree path: $worktree_path"
   mkdir -p "$(dirname "$worktree_path")" || return 1
   git worktree add -b "$branch" "$worktree_path" "$start_point" || return 1
   pushd "$worktree_path"
