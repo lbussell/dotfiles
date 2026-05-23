@@ -23,13 +23,26 @@ eval "$(atuin init zsh)"
 # ~/.local/bin for standalone tools
 export PATH="$HOME/.local/bin:$PATH"
 
+# Go binaries installed with `go install`
+export PATH="$HOME/go/bin:$PATH"
+
 # BEGIN Agency MANAGED BLOCK
 if [[ ":${PATH}:" != *":/Users/loganbussell/.config/agency/CurrentVersion:"* ]]; then
     export PATH="/Users/loganbussell/.config/agency/CurrentVersion:${PATH}"
 fi
 # END Agency MANAGED BLOCK
 
-[ -f "$HOME/Library/Application Support/dnvm/env" ] && . "$HOME/Library/Application Support/dnvm/env"
+# dnvm: always prepend so it wins over any other dotnet (e.g. homebrew)
+# inherited from VS Code's parent environment.
+if [ -d "$HOME/Library/Application Support/dnvm" ]; then
+    export DOTNET_ROOT="$HOME/Library/Application Support/dnvm/dn"
+    # Strip any existing occurrences, then prepend.
+    PATH="${PATH//"$HOME/Library/Application Support/dnvm:"/}"
+    PATH="${PATH//":$HOME/Library/Application Support/dnvm"/}"
+    PATH="${PATH//"$HOME/.dotnet/tools:"/}"
+    PATH="${PATH//":$HOME/.dotnet/tools"/}"
+    export PATH="$HOME/Library/Application Support/dnvm:$HOME/.dotnet/tools:$PATH"
+fi
 [ -f "$HOME/.zsh_aliases" ] && . "$HOME/.zsh_aliases"
 [ -f "$HOME/.config/shell/git-functions.sh" ] && . "$HOME/.config/shell/git-functions.sh"
 
