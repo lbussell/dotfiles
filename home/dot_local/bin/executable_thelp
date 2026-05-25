@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+# Friendly tmux cheatsheet. Save to ~/.local/bin/tmux-help and chmod +x.
+
+# --- figure out where the config actually lives ---
+if [ -f "$HOME/.tmux.conf" ]; then
+  conf="$HOME/.tmux.conf"
+elif [ -f "$HOME/.config/tmux/tmux.conf" ]; then
+  conf="$HOME/.config/tmux/tmux.conf"
+else
+  conf="$HOME/.tmux.conf (not created yet)"
+fi
+
+# --- ask tmux where we are, if we're inside it ---
+if [ -n "$TMUX" ]; then
+  read -r session window pane <<<"$(tmux display-message -p '#S #I:#W #P')"
+  here="You're in session \"$session\", window $window, pane $pane."
+else
+  here="You're not inside tmux right now."
+fi
+
+cat <<EOF
+
+  TMUX HELP
+  ---------
+
+  Your prefix is Ctrl-a.
+  $here
+
+  Your config lives at:
+    $conf
+  To edit it:
+    vim $conf
+  To reload after editing:
+    prefix r   (or: tmux source-file $conf)
+
+  Moving around
+  =============
+    Alt-h/j/k/l     move between panes
+    prefix |        split pane left/right
+    prefix -        split pane top/bottom
+    prefix z        zoom one pane fullscreen (repeat to undo)
+    prefix x        close the current pane
+    ...or just click and drag with the mouse.
+
+    Ctrl-g          lazygit popup (no prefix) — q to close it
+
+  Window management (aka "tabs")
+  ==============================
+    prefix c        new window
+    prefix ,        rename this window
+    prefix n / p    next / previous
+    prefix 1-9      jump straight to a number
+    prefix w        pick from a list
+    prefix &        close the window
+
+  Sessions
+  ========
+  Inside tmux:
+    prefix d            detach (leaves it running)
+    prefix s            switch between sessions
+  Outside tmux:
+    tmux new -s name    start a named session
+    tmux ls             list them
+    tmux a -t name      reattach to one
+
+  HANDY EXTRAS
+    prefix [        scroll/copy mode — q to exit
+    prefix ]        paste
+    prefix :        command prompt
+    prefix ?        the full, official list of every binding
+
+EOF

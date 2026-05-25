@@ -17,18 +17,16 @@ keybind = super+,=text:ghostty +edit-config\n
 # macos-icon = retro
 
 macos-icon = custom-style
-# macos-icon-frame = aluminum
-# macos-icon-frame = beige
 macos-icon-frame = plastic
-# macos-icon-frame = chrome
-# macos-icon-ghost-color = #EEEAFB
 macos-icon-ghost-color = #B9AAEE
-# macos-icon-ghost-color = #512BD4
 macos-icon-screen-color = #512BD4
 
 # Bell/Notification settings
 # Enable system bell sound for terminal notifications
 bell-features = system,attention,title
+
+palette-generate = true
+palette-harmonious = false
 
 # theme = Xcode Dark hc
 # theme = Subliminal
