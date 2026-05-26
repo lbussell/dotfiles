@@ -26,18 +26,25 @@ macos-icon-screen-color = #512BD4
 bell-features = system,attention,title
 
 palette-generate = true
-palette-harmonious = false
+palette-harmonious = true
 
+background-opacity = 1.0
+background-blur = true
+
+# theme = xterm
 # theme = Xcode Dark hc
+
 # theme = Subliminal
-# theme = Dimidium
+
+theme = Dimidium
 # theme = Dimidium Light Dim
+
 # theme = light:Dimidium Light Dim,dark:Dimidium
 # theme = Penumbra Dark Contrast+
 # theme = light:Penumbra Light,dark:Penumbra Dark Contrast++
 # theme = Penumbra Light
 # theme = light:Flexoki Light,dark:Penumbra Dark Contrast++
-theme = light:One Half Light,dark:Catppuccin Mocha
+# theme = light:One Half Light,dark:Catppuccin Mocha
 # theme = iTerm2 Solarized Light
 
 font-size = 14

@@ -3,7 +3,6 @@
 -- Add any additional options here
 
 -- Use terminal 256 colors only.
--- Copied from https://github.com/LazyVim/LazyVim/discussions/1933
-vim.cmd.colorscheme = nil
 vim.opt.termguicolors = false
-vim.cmd("set t_Co=256")
+vim.opt.pumblend = 0
+vim.opt.winblend = 0
