@@ -28,30 +28,21 @@ bell-features = system,attention,title
 palette-generate = true
 palette-harmonious = true
 
-background-opacity = 1.0
+background-opacity = 1.00
 background-blur = true
 
-# theme = xterm
-# theme = Xcode Dark hc
-
-# theme = Subliminal
-
-theme = Dimidium
-# theme = Dimidium Light Dim
-
-# theme = light:Dimidium Light Dim,dark:Dimidium
-# theme = Penumbra Dark Contrast+
-# theme = light:Penumbra Light,dark:Penumbra Dark Contrast++
-# theme = Penumbra Light
-# theme = light:Flexoki Light,dark:Penumbra Dark Contrast++
-# theme = light:One Half Light,dark:Catppuccin Mocha
-# theme = iTerm2 Solarized Light
+theme = light:3024 Day,dark:Catppuccin Mocha
 
 font-size = 14
+
 # font-family = Monaspace Krypton Var
 # font-family = Monaspace Xenon Var
 # font-family = Monaspace Argon Var
-font-family = Monaspace Neon Var
+# font-family = Monaspace Neon Var
 # font-family = Monaspace Radon Var
 # font-thicken = false
+
+# Departure Mono font size must be in increments of 11
+# font-family = Departure Mono
+# font-codepoint-map = U+2500-U+257F,U+E0A0-U+E0A3,U+E0B0-U+E0C8,U+E0CA,U+E0CC-U+E0D7=Departure Mono
 

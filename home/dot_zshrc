@@ -1,5 +1,10 @@
 # .zshrc
 
+# Disable bell for all errors
+unsetopt BEEP
+# Disable bell for tab autocomplete
+unsetopt LIST_BEEP
+
 # Prompt: green username, directory, and %
 setopt PROMPT_SUBST
 PROMPT='%F{green}[%f%F{green}%n%f %1~%F{green}]%f%F{green}%# %f'
@@ -44,7 +49,7 @@ if [ -d "$HOME/Library/Application Support/dnvm" ]; then
     export PATH="$HOME/Library/Application Support/dnvm:$HOME/.dotnet/tools:$PATH"
 fi
 [ -f "$HOME/.zsh_aliases" ] && . "$HOME/.zsh_aliases"
-[ -f "$HOME/.config/shell/git-functions.sh" ] && . "$HOME/.config/shell/git-functions.sh"
+[ -f "$HOME/.config/shell/git.sh" ] && . "$HOME/.config/shell/git.sh"
 
 # Added by get-aspire-cli.sh
 export PATH="$HOME/.aspire/bin:$PATH"
