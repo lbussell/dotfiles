@@ -1,45 +1,47 @@
 [metadata]
 name = "git-worktrees"
-description = "Browse and manage git worktrees"
-requirements = ["git"]
+description = "Browse git worktrees: status, commits and PR info"
+requirements = ["git", "gh"]
 
 [source]
-command = "git worktree list | sed \"s|$HOME|~|g\""
+command = "git worktree list"
 output = "{split: :0}"
 no_sort = true
 
 [preview]
-command = [
-  "git -C {0} log --oneline --graph --decorate -20 --color=always",
-]
+# Plain, unformatted git/gh output — status, recent commits and any PR.
+command = "cd {split: :0} && echo '=== status ===' && git status -sb && echo && echo '=== recent commits ===' && git log --oneline -15 && echo && echo '=== pull request ===' && gh pr view 2>&1 | head -n 40"
+
+[ui]
+layout = "portrait"
 
 [ui.preview_panel]
 size = 55
 
 [keybindings]
-enter = "actions:cd"
+shortcut = "f2"
+enter = "actions:shell"
 ctrl-e = "actions:code"
-ctrl-g = "actions:lg"
+ctrl-g = "actions:copilot"
 ctrl-d = "actions:remove"
 
-[actions.cd]
-description = "Open a new shell in the selected worktree"
-command = "cd {0} && $SHELL"
+[actions.shell]
+description = "Open a shell in the worktree"
+command = "cd {split: :0} && exec $SHELL"
 mode = "execute"
 
 [actions.code]
-description = "Open the worktree in vscode"
-command = "code {0}"
+description = "Open the worktree in VS Code"
+command = "code {split: :0}"
 shell = "bash"
 mode = "fork"
 
-[actions.lg]
-description = "Open the worktree in lazygit"
-command = "cd {0} && lazygit"
-shell = "bash"
-mode = "fork"
+[actions.copilot]
+description = "Open the worktree with GitHub Copilot"
+command = "cd {split: :0} && exec $SHELL -ic copilot"
+mode = "execute"
 
 [actions.remove]
 description = "Remove the selected worktree"
-command = "gum confirm 'Remove worktree {0}?' && git worktree remove '{0}'"
+command = "gum confirm 'Remove worktree {split: :0}?' && git worktree remove '{split: :0}'"
 mode = "fork"

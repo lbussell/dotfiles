@@ -32,3 +32,18 @@ aliases:
       linux: "wl-copy"
       darwin: "pbcopy"
       windows: "clip"
+  - from: "g"
+    to:
+      default: "tv git-worktrees"
+  - from: "gw"
+    to:
+      default: "tv git-worktrees"
+  - from: "gb"
+    to:
+      default: "tv git-branches"
+  - from: "gp"
+    to:
+      default: "tv git-prs"
+  - from: "gi"
+    to:
+      default: "tv git-issues"

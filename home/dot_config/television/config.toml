@@ -55,6 +55,11 @@ orientation = "landscape"
 # directory in your configuration directory (see the `config.toml` location above).
 theme = "default"
 
+[ui.theme_overrides]
+selection_bg = "#cc66cc"
+selection_fg = "#ffddff"
+match_fg = "#ff8800"
+
 # Feature-specific configurations
 # Each feature can have its own configuration section
 [ui.input_bar]
