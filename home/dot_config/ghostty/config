@@ -1,48 +1,16 @@
-# Ghostty config
-# Reload config with cmd+shift+comma (ctrl+shift+comma on Linux)
+## Ghostty config ##
+# Reload config with cmd+shift+comma (Mac) or ctrl+shift+comma (Linux)
 
-# Press cmd+comma to open the config in your current terminal
-keybind = super+,=text:ghostty +edit-config\n
+## Behavior ##
 
-# Icon settings
-# macos-icon = official
-# macos-icon = blueprint
-# macos-icon = chalkboard
-# macos-icon = microchip
-# macos-icon = glass
-# macos-icon = holographic
-# macos-icon = paper
-# macos-icon = retro
-# macos-icon = xray
-# macos-icon = retro
-
-macos-icon = custom-style
-macos-icon-frame = plastic
-macos-icon-ghost-color = #B9AAEE
-macos-icon-screen-color = #512BD4
-
-# Bell/Notification settings
 # Enable system bell sound for terminal notifications
 bell-features = system,attention,title
 
-palette-generate = true
-palette-harmonious = true
-
-background-opacity = 1.00
-background-blur = true
-
-theme = light:3024 Day,dark:Catppuccin Mocha
+## Appearance ##
 
 font-size = 14
+theme = light:3024 Day,dark:Catppuccin Mocha
 
-# font-family = Monaspace Krypton Var
-# font-family = Monaspace Xenon Var
-# font-family = Monaspace Argon Var
-# font-family = Monaspace Neon Var
-# font-family = Monaspace Radon Var
-# font-thicken = false
-
-# Departure Mono font size must be in increments of 11
-# font-family = Departure Mono
-# font-codepoint-map = U+2500-U+257F,U+E0A0-U+E0A3,U+E0B0-U+E0C8,U+E0CA,U+E0CC-U+E0D7=Departure Mono
-
+# Generate ANSI 256 color palette from the 16 base colors
+palette-generate = true
+palette-harmonious = true
