@@ -17,3 +17,13 @@ sudo dnf install -y {{ range . }}{{ . }} {{ end }}
 brew install {{ range . }}{{ . }} {{ end }}
 {{ end -}}
 {{ end -}}
+
+{{ $scripts := .packages.scripts }}
+{{- range $entry := concat (index $scripts "unix" | default list) (index $scripts $key | default list) }}
+if ! command -v {{ $entry.check }} >/dev/null 2>&1; then
+  echo "Installing {{ $entry.name }}..."
+  {{ $entry.run | trim | nindent 2 }}
+else
+  echo "{{ $entry.name }} already installed, skipping."
+fi
+{{ end -}}
