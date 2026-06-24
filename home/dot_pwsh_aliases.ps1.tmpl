@@ -1,0 +1,11 @@
+# Managed by chezmoi
+{{ range $name, $cmd := .aliases.common -}}
+function {{ $name }} {
+    {{ $cmd }} @args
+}
+{{ end -}}
+{{ range $name, $cmd := .aliases.pwsh -}}
+function {{ $name }} {
+    {{ $cmd }} @args
+}
+{{ end -}}

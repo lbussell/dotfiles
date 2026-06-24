@@ -1,6 +1,11 @@
-# Interactively select a repo under D:\s\ with gum and cd into it
+# Interactively select a repo under SOURCE_DIR with gum and cd into it
 function s {
-    $root = 'D:\s'
+    $root = $env:SOURCE_DIR
+    if (-not $root) {
+        Write-Warning 'SOURCE_DIR is not set'
+        return
+    }
+
     $repos = Get-ChildItem -Path $root -Directory |
         ForEach-Object { Get-ChildItem -Path $_.FullName -Directory } |
         ForEach-Object { $_.FullName.Substring($root.Length + 1) } |
@@ -84,12 +89,3 @@ function w {
         }
     }
 }
-
-# Reload the PowerShell profile in the current session
-function reload {
-    . (Join-Path $HOME '.config/powershell/profile.ps1')
-}
-
-# Use dotnet installed by dotnetup
-$env:DOTNET_ROOT = 'C:\Users\loganbussell\AppData\Local\dotnet'
-$env:PATH = 'C:\Users\loganbussell\.dotnetup' + [IO.Path]::PathSeparator + 'C:\Users\loganbussell\AppData\Local\dotnet' + [IO.Path]::PathSeparator + $env:PATH

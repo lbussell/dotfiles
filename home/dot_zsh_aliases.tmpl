@@ -2,6 +2,9 @@
 {{ range $name, $cmd := .aliases.common -}}
 alias {{ $name }}={{ $cmd | quote }}
 {{ end -}}
+{{ range $name, $cmd := .aliases.unix -}}
+alias {{ $name }}={{ $cmd | quote }}
+{{ end -}}
 {{ range $name, $cmd := .aliases.zsh -}}
 alias {{ $name }}={{ $cmd | quote }}
 {{ end -}}

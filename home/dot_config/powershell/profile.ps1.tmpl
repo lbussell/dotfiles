@@ -1,0 +1,42 @@
+# Fix colors for light theme
+Set-PSReadLineOption -Colors @{
+    ContinuationPrompt      = "`e[39m"
+    Default                 = "`e[39m"
+    Member                  = "`e[39m"
+    Number                  = "`e[39m"
+    Type                    = "`e[39m"
+    ListPredictionSelected  = "`e[7m"
+}
+
+{{ if eq .chezmoi.os "windows" -}}
+# Tell Windows Terminal about the CWD using OSC 9;9
+function prompt {
+    $loc = $executionContext.SessionState.Path.CurrentLocation;
+    $out = ""
+    if ($loc.Provider.Name -eq "FileSystem") {
+        $out += "$([char]27)]9;9;`"$($loc.ProviderPath)`"$([char]27)\"
+    }
+    $out += "PS $loc$('>' * ($nestedPromptLevel + 1)) ";
+    return $out
+}
+
+{{ end -}}
+if (-not $env:SOURCE_DIR) {
+{{ if eq .chezmoi.os "windows" -}}
+    # Use dev drive for source code
+    $env:SOURCE_DIR = 'D:\s'
+{{ else -}}
+    $env:SOURCE_DIR = Join-Path $HOME 's'
+{{ end -}}
+}
+
+# Source functions from a separate file.
+. (Join-Path $HOME '.config/powershell/functions.ps1')
+
+# Source aliases from a separate file.
+. (Join-Path $HOME '.pwsh_aliases.ps1')
+{{ if eq .chezmoi.os "windows" }}
+# Use dotnet installed by dotnetup
+$env:DOTNET_ROOT = Join-Path $HOME 'AppData\Local\dotnet'
+$env:PATH = (Join-Path $HOME '.dotnetup') + [IO.Path]::PathSeparator + $env:DOTNET_ROOT + [IO.Path]::PathSeparator + $env:PATH
+{{ end -}}

@@ -1,6 +1,12 @@
 aliases:
 
+  # Cross-platform aliases that invoke the same external command everywhere.
   common:
+    cz: chezmoi
+    lg: lazygit
+
+  # Unix shell (bash/zsh) syntax aliases.
+  unix:
     l: ls
     ll: ls -lah
     ".." : cd ..
@@ -11,3 +17,11 @@ aliases:
 
   zsh:
     reload: source ~/.zshrc
+
+  # PowerShell equivalents of the unix aliases.
+  pwsh:
+    l: Get-ChildItem
+    ll: Get-ChildItem -Force
+    ".." : Set-Location ..
+    grep: Select-String
+    reload: . (Join-Path $HOME '.config/powershell/profile.ps1')
