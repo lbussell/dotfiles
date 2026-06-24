@@ -6,14 +6,14 @@ set -eufo pipefail
 {{- $pkgs := index .packages $key }}
 
 {{ if $pkgs -}}
-{{ if $pkgs.apt -}}
+{{ with index $pkgs "apt" -}}
 sudo apt-get update
-sudo apt-get install -y {{ range $pkgs.apt }}{{ . }} {{ end }}
+sudo apt-get install -y {{ range . }}{{ . }} {{ end }}
 {{ end -}}
-{{ if $pkgs.dnf -}}
-sudo dnf install -y {{ range $pkgs.dnf }}{{ . }} {{ end }}
+{{ with index $pkgs "dnf" -}}
+sudo dnf install -y {{ range . }}{{ . }} {{ end }}
 {{ end -}}
-{{ if $pkgs.brew -}}
-brew install {{ range $pkgs.brew }}{{ . }} {{ end }}
+{{ with index $pkgs "brew" -}}
+brew install {{ range . }}{{ . }} {{ end }}
 {{ end -}}
 {{ end -}}
