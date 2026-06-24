@@ -1,0 +1,13 @@
+packages:
+
+  darwin:
+    brew:
+      - ripgrep
+      - tmux
+
+  ubuntu:
+    apt:
+      - git
+      - libicu-dev
+      - ripgrep
+      - tmux

@@ -1,0 +1,19 @@
+#!/bin/bash
+set -eufo pipefail
+
+{{- $key := .chezmoi.os }}
+{{- if eq .chezmoi.os "linux" }}{{ $key = .chezmoi.osRelease.id }}{{ end }}
+{{- $pkgs := index .packages $key }}
+
+{{ if $pkgs -}}
+{{ if $pkgs.apt -}}
+sudo apt-get update
+sudo apt-get install -y {{ range $pkgs.apt }}{{ . }} {{ end }}
+{{ end -}}
+{{ if $pkgs.dnf -}}
+sudo dnf install -y {{ range $pkgs.dnf }}{{ . }} {{ end }}
+{{ end -}}
+{{ if $pkgs.brew -}}
+brew install {{ range $pkgs.brew }}{{ . }} {{ end }}
+{{ end -}}
+{{ end -}}

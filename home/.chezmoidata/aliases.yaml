@@ -1,0 +1,13 @@
+aliases:
+
+  common:
+    l: ls
+    ll: ls -lah
+    ".." : cd ..
+    grep: grep --color=auto
+
+  bash:
+    reload: source ~/.bashrc
+
+  zsh:
+    reload: source ~/.zshrc
