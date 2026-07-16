@@ -1,3 +1,4 @@
+{{ if ne .chezmoi.os "windows" -}}
 #!/bin/bash
 set -eufo pipefail
 
@@ -27,3 +28,4 @@ else
   echo "{{ $entry.name }} already installed, skipping."
 fi
 {{ end -}}
+{{ end }}

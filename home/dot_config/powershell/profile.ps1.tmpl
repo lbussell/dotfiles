@@ -22,12 +22,17 @@ function prompt {
 
 {{ end -}}
 if (-not $env:SOURCE_DIR) {
-{{ if eq .chezmoi.os "windows" -}}
-    # Use dev drive for source code
-    $env:SOURCE_DIR = 'D:\s'
-{{ else -}}
+{{ if eq .chezmoi.os "windows" }}
+    $devDriveSourceDir = 'D:\src'
+    $env:SOURCE_DIR = if (Test-Path -LiteralPath $devDriveSourceDir -PathType Container) {
+        $devDriveSourceDir
+    }
+    else {
+        Join-Path $HOME 'src'
+    }
+{{ else }}
     $env:SOURCE_DIR = Join-Path $HOME 's'
-{{ end -}}
+{{ end }}
 }
 
 # Source functions from a separate file.
@@ -36,7 +41,19 @@ if (-not $env:SOURCE_DIR) {
 # Source aliases from a separate file.
 . (Join-Path $HOME '.pwsh_aliases.ps1')
 {{ if eq .chezmoi.os "windows" }}
-# Use dotnet installed by dotnetup
-$env:DOTNET_ROOT = Join-Path $HOME 'AppData\Local\dotnet'
-$env:PATH = (Join-Path $HOME '.dotnetup') + [IO.Path]::PathSeparator + $env:DOTNET_ROOT + [IO.Path]::PathSeparator + $env:PATH
+# Prefer dotnet installed by dotnetup when it is available.
+$dotnetUpBin = Join-Path $HOME '.dotnetup'
+$dotnetUpRoot = Join-Path $HOME 'AppData\Local\dotnet'
+$dotnetUpExecutable = Join-Path $dotnetUpRoot 'dotnet.exe'
+if (Test-Path -LiteralPath $dotnetUpExecutable -PathType Leaf) {
+    $env:DOTNET_ROOT = $dotnetUpRoot
+    $pathEntries = @($env:PATH -split [IO.Path]::PathSeparator)
+    $prependEntries = @(
+        @($dotnetUpBin, $dotnetUpRoot) |
+            Where-Object { (Test-Path -LiteralPath $_ -PathType Container) -and $_ -notin $pathEntries }
+    )
+    if ($prependEntries) {
+        $env:PATH = (@($prependEntries) + @($pathEntries)) -join [IO.Path]::PathSeparator
+    }
+}
 {{ end -}}

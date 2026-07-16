@@ -13,6 +13,11 @@ sh -c "$(curl -fsLS https://get.chezmoi.io/lb)" -- init --apply lbussell
 ### Windows
 
 ```pwsh
-winget install twpayne.chezmoi
-cz init --apply lbussell
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/lbussell/dotfiles/main/Setup-Windows.ps1)))
+chezmoi init lbussell
+chezmoi diff
+chezmoi apply
 ```
+
+The setup script installs chezmoi and gum with WinGet, then configures the
+active PowerShell profile to load the shared profile managed by chezmoi.

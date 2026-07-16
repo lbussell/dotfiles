@@ -1,3 +1,12 @@
+function Test-GumAvailable {
+    if (Get-Command gum -ErrorAction SilentlyContinue) {
+        return $true
+    }
+
+    Write-Warning 'gum is required and must be available on PATH.'
+    return $false
+}
+
 # Interactively select a repo under SOURCE_DIR with gum and cd into it
 function s {
     $root = $env:SOURCE_DIR
@@ -6,9 +15,19 @@ function s {
         return
     }
 
-    $repos = Get-ChildItem -Path $root -Directory |
-        ForEach-Object { Get-ChildItem -Path $_.FullName -Directory } |
-        ForEach-Object { $_.FullName.Substring($root.Length + 1) } |
+    $root = [IO.Path]::TrimEndingDirectorySeparator([IO.Path]::GetFullPath($root))
+    if (-not (Test-Path -LiteralPath $root -PathType Container)) {
+        Write-Warning "SOURCE_DIR does not exist: $root"
+        return
+    }
+
+    if (-not (Test-GumAvailable)) {
+        return
+    }
+
+    $repos = Get-ChildItem -LiteralPath $root -Directory -Recurse -Depth 1 |
+        Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName '.git') } |
+        ForEach-Object { [IO.Path]::GetRelativePath($root, $_.FullName) } |
         Sort-Object
 
     if (-not $repos) {
@@ -27,6 +46,10 @@ function w {
     $worktreeOutput = git worktree list --porcelain 2>$null
     if ($LASTEXITCODE -ne 0) {
         Write-Warning 'Not in a git repo'
+        return
+    }
+
+    if (-not (Test-GumAvailable)) {
         return
     }
 
