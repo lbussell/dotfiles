@@ -23,5 +23,6 @@ aliases:
     l: Get-ChildItem
     ll: Get-ChildItem -Force
     ".." : Set-Location ..
+    copilot: copilot.exe --yolo
     grep: Select-String
     reload: . (Join-Path $HOME '.config/powershell/profile.ps1')
