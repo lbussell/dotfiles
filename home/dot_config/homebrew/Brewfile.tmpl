@@ -1,6 +1,10 @@
 # Managed by chezmoi.
 cask "copilot-cli"
 
+{{ if not .workMachine -}}
+cask "codex"
+{{ end -}}
+
 {{ if and (eq .chezmoi.os "darwin") .gui -}}
 cask "ghostty"
 {{ end -}}

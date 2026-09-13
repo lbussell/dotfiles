@@ -18,6 +18,3 @@ chezmoi init lbussell
 chezmoi diff
 chezmoi apply
 ```
-
-The setup script installs chezmoi and gum with WinGet, then configures the
-active PowerShell profile to load the shared profile managed by chezmoi.

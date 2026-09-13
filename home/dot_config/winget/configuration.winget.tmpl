@@ -5,6 +5,17 @@ metadata:
       identifier: dscv3
 resources:
 
+{{ if not .workMachine -}}
+- type: Microsoft.WinGet/Package
+  name: CodexCLI
+  properties:
+    id: OpenAI.Codex
+    source: winget
+    useLatest: true
+  metadata:
+    description: Install Codex CLI on non-work machines
+
+{{ end -}}
 - type: Microsoft.WinGet/Package
   name: CopilotCLI
   properties:
