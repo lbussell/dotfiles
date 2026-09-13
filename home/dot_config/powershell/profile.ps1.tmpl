@@ -57,3 +57,6 @@ if (Test-Path -LiteralPath $dotnetUpExecutable -PathType Leaf) {
     }
 }
 {{ end -}}
+
+. (Join-Path $HOME '.local/share/chezmoi-helpers.ps1')
+Show-ChezmoiMotd

@@ -1,0 +1,5 @@
+# Managed by chezmoi.
+source "$HOME/.zsh_aliases"
+
+source "$HOME/.local/share/chezmoi-helpers.sh"
+show_chezmoi_motd
