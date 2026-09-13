@@ -1,0 +1,33 @@
+{{- if eq .chezmoi.os "windows" -}}
+$ErrorActionPreference = 'Stop'
+
+# Check the normal policy outside chezmoi's process-only execution-policy override.
+$policyCommand = @'
+$ErrorActionPreference = 'Stop'
+[Environment]::SetEnvironmentVariable('PSExecutionPolicyPreference', $null, 'Process')
+if ((Get-ExecutionPolicy) -eq 'Restricted') {
+    Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
+}
+if ((Get-ExecutionPolicy) -in @('Restricted', 'AllSigned')) {
+    throw 'Your execution policy prevents loading unsigned profiles. Follow your organization''s policy before continuing.'
+}
+'@
+& powershell.exe -NoLogo -NoProfile -Command $policyCommand
+if ($LASTEXITCODE -ne 0) {
+    throw 'Could not enable loading the managed PowerShell profile.'
+}
+
+$profilePath = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'PowerShell\profile.ps1'
+$profileLine = '. (Join-Path $HOME ''.config/powershell/profile.ps1'')'
+
+if (Test-Path -LiteralPath $profilePath -PathType Leaf) {
+    $existingLines = @(Get-Content -LiteralPath $profilePath)
+    if ($existingLines | Where-Object { $_.Trim() -eq $profileLine }) {
+        return
+    }
+}
+
+New-Item -ItemType Directory -Path (Split-Path -Parent $profilePath) -Force | Out-Null
+Add-Content -LiteralPath $profilePath -Value "`n$profileLine"
+Write-Host 'PowerShell profile configured.'
+{{ end -}}

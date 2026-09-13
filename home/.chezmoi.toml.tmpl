@@ -20,6 +20,14 @@
 {{- end -}}
 {{- $packageMode := promptChoiceOnce . "packageMode" "How should packages be managed" $packageChoices $packageDefault -}}
 
+{{ if eq .chezmoi.os "windows" -}}
+# WinGet installs pwsh later; setup scripts must support built-in PowerShell 5.1.
+[interpreters.ps1]
+command = "powershell.exe"
+# Skip profiles during setup. Bypass is process-only; Group Policy still applies.
+args = ["-NoLogo", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File"]
+
+{{ end -}}
 [data]
 workMachine = {{ $workMachine }}
 gui = {{ $gui }}

@@ -1,0 +1,28 @@
+{{ includeTemplate "find-brew.sh" . }}
+
+initialize_shell_environment() {
+    local brew_path brew_environment shell_name
+
+    case ":$PATH:" in
+        *":$HOME/.local/bin:"*) ;;
+        *) PATH="$HOME/.local/bin:$PATH" ;;
+    esac
+    export PATH
+
+{{ if eq .packageMode "homebrew" -}}
+    if ! brew_path=$(find_brew); then
+        printf 'Homebrew is enabled but brew was not found. Run chezmoi apply to install it.\n' >&2
+        return 1
+    fi
+
+    shell_name=bash
+    if [ -n "${ZSH_VERSION:-}" ]; then
+        shell_name=zsh
+    fi
+    if ! brew_environment=$("$brew_path" shellenv "$shell_name"); then
+        printf 'Could not initialize the Homebrew shell environment.\n' >&2
+        return 1
+    fi
+    eval "$brew_environment"
+{{ end -}}
+}

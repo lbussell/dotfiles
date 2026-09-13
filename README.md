@@ -4,17 +4,14 @@ My dotfiles, managed with [chezmoi](https://github.com/twpayne/chezmoi).
 
 ## Install
 
-### Linux
+### macOS and Linux
 
 ```bash
-sh -c "$(curl -fsLS https://get.chezmoi.io/lb)" -- init --apply lbussell
+sh -c "$(curl -fsLS https://get.chezmoi.io)" -- -b "$HOME/.local/bin" init --apply lbussell
 ```
 
 ### Windows
 
 ```pwsh
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/lbussell/dotfiles/main/Setup-Windows.ps1)))
-chezmoi init lbussell
-chezmoi diff
-chezmoi apply
 ```

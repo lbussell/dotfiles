@@ -1,4 +1,7 @@
 # Managed by chezmoi.
+source "$HOME/.local/share/shell-environment.sh"
+initialize_shell_environment
+
 source "$HOME/.zsh_aliases"
 
 source "$HOME/.local/share/chezmoi-helpers.sh"

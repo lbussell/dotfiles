@@ -6,6 +6,18 @@ $ErrorActionPreference = 'Stop'
 $configurationPath = Join-Path $HOME '.config\winget\configuration.winget'
 $winget = Get-Command winget.exe -ErrorAction Stop
 
+$versionOutput = & $winget.Source --version
+if ($LASTEXITCODE -ne 0) {
+    throw "Could not determine the WinGet version (exit code $LASTEXITCODE)."
+}
+$versionMatch = [regex]::Match(($versionOutput -join "`n").Trim(), '^v?(\d+\.\d+\.\d+)(?:[-+].*)?$')
+if (-not $versionMatch.Success) {
+    throw "Unrecognized WinGet version: $versionOutput"
+}
+if ([version]$versionMatch.Groups[1].Value -lt [version]'1.11.0') {
+    throw 'DSC v3 requires WinGet 1.11 or newer. Update App Installer through Microsoft Store, then run chezmoi apply again.'
+}
+
 & $winget.Source configure validate --file $configurationPath
 if ($LASTEXITCODE -ne 0) {
     throw "WinGet configuration validation failed with exit code $LASTEXITCODE."
