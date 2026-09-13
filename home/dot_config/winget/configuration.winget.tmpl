@@ -24,6 +24,15 @@ resources:
   metadata:
     description: Install 1Password CLI
 
+- type: Microsoft.WinGet/Package
+  name: PowerToys
+  properties:
+    id: Microsoft.PowerToys
+    source: winget
+    useLatest: true
+  metadata:
+    description: Install PowerToys
+
 {{ end -}}
 {{ if not .workMachine -}}
 - type: Microsoft.WinGet/Package
