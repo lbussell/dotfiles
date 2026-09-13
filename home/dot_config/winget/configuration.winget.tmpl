@@ -6,6 +6,15 @@ metadata:
 resources:
 
 - type: Microsoft.WinGet/Package
+  name: CopilotCLI
+  properties:
+    id: GitHub.Copilot
+    source: winget
+    useLatest: true
+  metadata:
+    description: Install GitHub Copilot CLI
+
+- type: Microsoft.WinGet/Package
   name: PowerShell
   properties:
     id: Microsoft.PowerShell

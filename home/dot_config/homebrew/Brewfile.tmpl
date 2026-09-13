@@ -1,4 +1,6 @@
 # Managed by chezmoi.
+cask "copilot-cli"
+
 {{ if and (eq .chezmoi.os "darwin") .gui -}}
 cask "ghostty"
 {{ end -}}
