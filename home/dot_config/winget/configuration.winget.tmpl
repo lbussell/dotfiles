@@ -37,6 +37,15 @@ resources:
 
 {{ end -}}
 - type: Microsoft.WinGet/Package
+  name: GitHubCLI
+  properties:
+    id: GitHub.cli
+    source: winget
+    useLatest: true
+  metadata:
+    description: Install GitHub CLI
+
+- type: Microsoft.WinGet/Package
   name: Gum
   properties:
     id: charmbracelet.gum
