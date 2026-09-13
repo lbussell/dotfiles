@@ -5,6 +5,26 @@ metadata:
       identifier: dscv3
 resources:
 
+{{ if and (eq .chezmoi.os "windows") .gui -}}
+- type: Microsoft.WinGet/Package
+  name: OnePassword
+  properties:
+    id: AgileBits.1Password
+    source: winget
+    useLatest: true
+  metadata:
+    description: Install 1Password
+
+- type: Microsoft.WinGet/Package
+  name: OnePasswordCLI
+  properties:
+    id: AgileBits.1Password.CLI
+    source: winget
+    useLatest: true
+  metadata:
+    description: Install 1Password CLI
+
+{{ end -}}
 {{ if not .workMachine -}}
 - type: Microsoft.WinGet/Package
   name: CodexCLI
@@ -16,6 +36,15 @@ resources:
     description: Install Codex CLI on non-work machines
 
 {{ end -}}
+- type: Microsoft.WinGet/Package
+  name: Gum
+  properties:
+    id: charmbracelet.gum
+    source: winget
+    useLatest: true
+  metadata:
+    description: Install Gum
+
 - type: Microsoft.WinGet/Package
   name: CopilotCLI
   properties:
