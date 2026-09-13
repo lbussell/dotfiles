@@ -1,0 +1,27 @@
+{{- $workMachine := promptBoolOnce . "workMachine" "Is this a work machine" false -}}
+{{- $guiDefault := or (eq .chezmoi.os "darwin") (eq .chezmoi.os "windows") -}}
+{{- $gui := promptBoolOnce . "gui" "Does this machine have a graphical desktop" $guiDefault -}}
+
+{{- $wsl := false -}}
+{{- if eq .chezmoi.os "linux" -}}
+{{-   $wsl = contains "microsoft" (lower .chezmoi.kernel.osrelease) -}}
+{{- end -}}
+
+{{- $packageChoices := list "none" -}}
+{{- $packageDefault := "none" -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $packageChoices = list "homebrew" "none" -}}
+{{-   $packageDefault = "homebrew" -}}
+{{- else if eq .chezmoi.os "linux" -}}
+{{-   $packageChoices = list "homebrew" "native" "none" -}}
+{{- else if eq .chezmoi.os "windows" -}}
+{{-   $packageChoices = list "winget" "none" -}}
+{{-   $packageDefault = "winget" -}}
+{{- end -}}
+{{- $packageMode := promptChoiceOnce . "packageMode" "How should packages be managed" $packageChoices $packageDefault -}}
+
+[data]
+workMachine = {{ $workMachine }}
+gui = {{ $gui }}
+packageMode = {{ $packageMode | quote }}
+wsl = {{ $wsl }}
