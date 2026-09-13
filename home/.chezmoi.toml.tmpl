@@ -1,6 +1,8 @@
 {{- $workMachine := promptBoolOnce . "workMachine" "Is this a work machine" false -}}
 {{- $guiDefault := or (eq .chezmoi.os "darwin") (eq .chezmoi.os "windows") -}}
 {{- $gui := promptBoolOnce . "gui" "Does this machine have a graphical desktop" $guiDefault -}}
+{{- $gitName := promptStringOnce . "gitName" "What name should Git use" -}}
+{{- $gitEmail := promptStringOnce . "gitEmail" "What email address should Git use" -}}
 
 {{- $wsl := false -}}
 {{- if eq .chezmoi.os "linux" -}}
@@ -33,3 +35,5 @@ workMachine = {{ $workMachine }}
 gui = {{ $gui }}
 packageMode = {{ $packageMode | quote }}
 wsl = {{ $wsl }}
+gitName = {{ $gitName | quote }}
+gitEmail = {{ $gitEmail | quote }}
