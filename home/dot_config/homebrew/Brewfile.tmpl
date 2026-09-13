@@ -1,0 +1,4 @@
+# Managed by chezmoi.
+{{ if and (eq .chezmoi.os "darwin") .gui -}}
+cask "ghostty"
+{{ end -}}

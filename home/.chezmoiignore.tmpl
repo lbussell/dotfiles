@@ -1,0 +1,6 @@
+{{ if ne .packageMode "homebrew" -}}
+.config/homebrew/Brewfile
+{{ end -}}
+{{ if ne .packageMode "winget" -}}
+.config/winget/configuration.winget
+{{ end -}}

@@ -1,0 +1,16 @@
+{{- if eq .packageMode "homebrew" -}}
+{{- $brewfile := includeTemplate "dot_config/homebrew/Brewfile.tmpl" . -}}
+#!/bin/bash
+set -euo pipefail
+
+# Brewfile checksum: {{ $brewfile | sha256sum }}
+{{ includeTemplate "find-brew.sh" . }}
+
+if ! brew_path="$(find_brew)"; then
+    printf 'Homebrew is selected but brew was not found.\n' >&2
+    exit 1
+fi
+
+eval "$("$brew_path" shellenv)"
+"$brew_path" bundle --file="$HOME/.config/homebrew/Brewfile"
+{{- end }}

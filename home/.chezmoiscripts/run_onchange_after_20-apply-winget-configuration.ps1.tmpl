@@ -1,0 +1,20 @@
+{{- if eq .packageMode "winget" -}}
+{{- $configuration := includeTemplate "dot_config/winget/configuration.winget.tmpl" . -}}
+$ErrorActionPreference = 'Stop'
+
+# Configuration checksum: {{ $configuration | sha256sum }}
+$configurationPath = Join-Path $HOME '.config\winget\configuration.winget'
+$winget = Get-Command winget.exe -ErrorAction Stop
+
+& $winget.Source configure validate --file $configurationPath
+if ($LASTEXITCODE -ne 0) {
+    throw "WinGet configuration validation failed with exit code $LASTEXITCODE."
+}
+
+& $winget.Source configure --file $configurationPath `
+    --accept-configuration-agreements `
+    --disable-interactivity
+if ($LASTEXITCODE -ne 0) {
+    throw "WinGet configuration failed with exit code $LASTEXITCODE."
+}
+{{- end }}
