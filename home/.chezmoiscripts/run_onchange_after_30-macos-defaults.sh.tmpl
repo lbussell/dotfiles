@@ -1,0 +1,45 @@
+{{- if and (eq .chezmoi.os "darwin") .gui -}}
+#!/bin/bash
+set -euo pipefail
+
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0.4
+defaults write com.apple.dock orientation -string bottom
+defaults write com.apple.dock tilesize -int 48
+defaults write com.apple.dock magnification -bool false
+defaults write com.apple.dock largesize -int 16
+defaults write com.apple.dock launchanim -bool true
+defaults write com.apple.dock mineffect -string genie
+defaults write com.apple.dock minimize-to-application -bool false
+defaults write com.apple.dock show-process-indicators -bool true
+defaults write com.apple.dock show-recents -bool false
+
+# Mission Control and App Expose.
+defaults write com.apple.dock mru-spaces -bool false
+defaults write com.apple.dock expose-group-apps -bool false
+defaults write com.apple.dock enterMissionControlByTopWindowDrag -bool true
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
+
+# Hot corners: bottom left Launchpad, top left Mission Control,
+# both right corners disabled.
+defaults write com.apple.dock wvous-bl-corner -int 11
+defaults write com.apple.dock wvous-bl-modifier -int 0
+defaults write com.apple.dock wvous-br-corner -int 1
+defaults write com.apple.dock wvous-tl-corner -int 2
+defaults write com.apple.dock wvous-tl-modifier -int 0
+defaults write com.apple.dock wvous-tr-corner -int 1
+defaults write com.apple.dock wvous-tr-modifier -int 0
+
+# Finder.
+defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write com.apple.finder FXPreferredViewStyle -string Nlsv
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Keyboard repeat.
+defaults write -g KeyRepeat -int 2
+defaults write -g InitialKeyRepeat -int 15
+
+printf 'macOS preferences saved. Log out and back in for all changes to take effect.\n'
+{{ end -}}
