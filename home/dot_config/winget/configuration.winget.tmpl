@@ -35,6 +35,17 @@ resources:
   metadata:
     description: Install Codex CLI on non-work machines
 
+{{ if and (eq .chezmoi.os "windows") .gui -}}
+- type: Microsoft.WinGet/Package
+  name: ChatGPT
+  properties:
+    id: 9NT1R1C2HH7J
+    source: msstore
+    useLatest: true
+  metadata:
+    description: Install ChatGPT on non-work machines
+
+{{ end -}}
 {{ end -}}
 - type: Microsoft.WinGet/Package
   name: GitHubCLI

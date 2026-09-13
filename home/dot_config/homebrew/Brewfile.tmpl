@@ -5,12 +5,15 @@ brew "gum"
 
 cask "copilot-cli"
 
-{{ if not .workMachine -}}
-cask "codex"
-{{ end -}}
-
 {{ if and (eq .chezmoi.os "darwin") .gui -}}
 cask "1password"
 cask "1password-cli"
 cask "ghostty"
+{{ end -}}
+
+{{ if not .workMachine -}}
+cask "codex"
+{{ if and (eq .chezmoi.os "darwin") .gui -}}
+cask "chatgpt"
+{{ end -}}
 {{ end -}}
