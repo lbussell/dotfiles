@@ -75,6 +75,15 @@ resources:
     description: Install GitHub Copilot CLI
 
 - type: Microsoft.WinGet/Package
+  name: Neovim
+  properties:
+    id: Neovim.Neovim
+    source: winget
+    useLatest: true
+  metadata:
+    description: Install Neovim
+
+- type: Microsoft.WinGet/Package
   name: PowerShell
   properties:
     id: Microsoft.PowerShell
