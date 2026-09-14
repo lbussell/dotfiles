@@ -4,6 +4,7 @@ aliases:
   common:
     cz: chezmoi
     lg: lazygit
+    vim: nvim
 
   # Unix shell (bash/zsh) syntax aliases.
   unix:
