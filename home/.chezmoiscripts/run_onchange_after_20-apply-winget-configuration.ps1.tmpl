@@ -18,11 +18,6 @@ if ([version]$versionMatch.Groups[1].Value -lt [version]'1.11.0') {
     throw 'DSC v3 requires WinGet 1.11 or newer. Update App Installer through Microsoft Store, then run chezmoi apply again.'
 }
 
-& $winget.Source configure validate --file $configurationPath
-if ($LASTEXITCODE -ne 0) {
-    throw "WinGet configuration validation failed with exit code $LASTEXITCODE."
-}
-
 & $winget.Source configure --file $configurationPath `
     --accept-configuration-agreements `
     --disable-interactivity
