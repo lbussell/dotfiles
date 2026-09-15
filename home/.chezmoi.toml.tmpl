@@ -23,6 +23,10 @@
 {{- $packageMode := promptChoiceOnce . "packageMode" "How should packages be managed" $packageChoices $packageDefault -}}
 
 {{ if eq .chezmoi.os "windows" -}}
+[cd]
+command = "pwsh.exe"
+args = ["-NoLogo"]
+
 # WinGet installs pwsh later; setup scripts must support built-in PowerShell 5.1.
 [interpreters.ps1]
 command = "powershell.exe"
