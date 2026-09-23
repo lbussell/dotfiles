@@ -102,6 +102,15 @@ resources:
     description: Install Neovim
 
 - type: Microsoft.WinGet/Package
+  name: Uv
+  properties:
+    id: astral-sh.uv
+    source: winget
+    useLatest: true
+  metadata:
+    description: Install uv Python tooling
+
+- type: Microsoft.WinGet/Package
   name: PowerShell
   properties:
     id: Microsoft.PowerShell
